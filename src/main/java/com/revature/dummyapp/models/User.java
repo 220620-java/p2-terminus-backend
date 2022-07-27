@@ -1,4 +1,4 @@
-package spring.tony.testapp.models;
+package com.revature.dummyapp.models;
 
 import java.util.Objects;
 

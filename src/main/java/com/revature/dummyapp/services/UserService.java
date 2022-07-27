@@ -1,8 +1,8 @@
-package spring.tony.testapp.services;
+package com.revature.dummyapp.services;
 
 import java.util.List;
 
-import spring.tony.testapp.models.User;
+import com.revature.dummyapp.models.User;
 
 public interface UserService {
 	User saveUser(User user);

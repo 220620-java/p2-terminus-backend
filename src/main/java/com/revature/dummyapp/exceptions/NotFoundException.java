@@ -1,4 +1,4 @@
-package spring.tony.testapp.exceptions;
+package com.revature.dummyapp.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
