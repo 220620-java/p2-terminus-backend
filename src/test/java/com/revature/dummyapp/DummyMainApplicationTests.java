@@ -1,10 +1,10 @@
-package spring.tony.testapp;
+package com.revature.dummyapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestAppApplicationTests {
+class DummyMainApplicationTests {
 
 	@Test
 	void contextLoads() {

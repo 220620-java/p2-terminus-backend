@@ -1,4 +1,4 @@
-package spring.tony.testapp.controllers;
+package com.revature.dummyapp.controllers;
 
 import java.util.List;
 
@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import spring.tony.testapp.models.User;
-import spring.tony.testapp.services.UserService;
+import com.revature.dummyapp.models.User;
+import com.revature.dummyapp.services.UserService;
 
 @RestController
 @RequestMapping("/users")

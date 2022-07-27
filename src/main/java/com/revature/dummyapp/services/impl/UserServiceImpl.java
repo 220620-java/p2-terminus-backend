@@ -1,13 +1,14 @@
-package spring.tony.testapp.services.impl;
+package com.revature.dummyapp.services.impl;
 
 import java.util.List;
 import java.util.Optional;
 
-import spring.tony.testapp.data.UserRepository;
-import spring.tony.testapp.exceptions.NotFoundException;
-import spring.tony.testapp.models.User;
-import spring.tony.testapp.services.UserService;
 import org.springframework.stereotype.Service;
+
+import com.revature.dummyapp.data.UserRepository;
+import com.revature.dummyapp.exceptions.NotFoundException;
+import com.revature.dummyapp.models.User;
+import com.revature.dummyapp.services.UserService;
 
 
 @Service
