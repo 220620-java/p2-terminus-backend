@@ -53,14 +53,14 @@ public class UserController {
 	}
 	
 	// build get user by id REST API
-	// http://localhost:8080/api/user/1
+	// http://localhost:8080/user/1
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") long userId){
 		return new ResponseEntity<User>(userService.getUserById(userId), HttpStatus.OK);
 	}
 	
 	// build update user REST API
-	// http://localhost:8080/api/users/1
+	// http://localhost:8080/users/1
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable("id") long id,@RequestBody User user){
 		System.out.println("test");
@@ -68,7 +68,7 @@ public class UserController {
 	}
 	
 	// build delete user REST API
-	// http://localhost:8080/api/users/1
+	// http://localhost:8080/users/1
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable("id") long id){
 		
