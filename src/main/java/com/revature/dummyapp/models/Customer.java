@@ -13,23 +13,24 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="customer")
+@Table(name="customers")
 public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "customer_id")
 	private long id;
 	
-	@Column(name = "firstname")
+	@Column(name = "first_name")
 	private String firstname;
 	
-	@Column(name = "lastname")
+	@Column(name = "last_name")
 	private String lastname;
 	
 	@Column(name = "passwrd")
 	private String password;
 	
-	@Column(name = "username")
+	@Column(name = "user_name")
 	private String username;
 	
 	@Column(name = "email")
@@ -87,17 +88,10 @@ public class Customer {
 		this.email = email;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, firstname, id, lastname, orders, password, username);
+		return Objects.hash(email, firstname, id, lastname, password, username);
 	}
 
 	@Override
@@ -110,14 +104,13 @@ public class Customer {
 			return false;
 		Customer other = (Customer) obj;
 		return Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname) && id == other.id
-				&& Objects.equals(lastname, other.lastname) && Objects.equals(orders, other.orders)
 				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
 
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", password=" + password
-				+ ", username=" + username + ", email=" + email + ", orders=" + orders + "]";
+				+ ", username=" + username + ", email=" + email + "]";
 	}
 
 }
