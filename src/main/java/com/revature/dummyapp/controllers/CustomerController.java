@@ -67,7 +67,7 @@ public class CustomerController {
 	// build delete user REST API
 	// http://localhost:8080/users/1
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteUser(@PathVariable("id") long id){
+	public ResponseEntity<String> deleteCustomer(@PathVariable("id") long id){
 		
 		// delete user from DB
 		customerService.deleteCustomer(id);

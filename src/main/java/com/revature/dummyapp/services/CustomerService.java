@@ -3,6 +3,7 @@ package com.revature.dummyapp.services;
 import java.util.List;
 
 import com.revature.dummyapp.models.Customer;
+import com.revature.dummyapp.models.Product;
 
 public interface CustomerService {
 	Customer saveCustomer(Customer customer);
@@ -10,4 +11,5 @@ public interface CustomerService {
 	Customer getCustomerById(long customerid);
 	Customer updateCustomer(Customer customer, long customerid);
 	void deleteCustomer(long customerid);
+	Product getProduct(long id);
 }

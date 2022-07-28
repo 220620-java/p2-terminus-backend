@@ -1,4 +1,4 @@
-package com.revature.dummyapp.services.impl;
+package com.revature.dummyapp.services;
 
 import java.util.List;
 
@@ -7,28 +7,27 @@ import org.springframework.stereotype.Service;
 import com.revature.dummyapp.data.CustomerRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.models.Customer;
-import com.revature.dummyapp.services.CustomerService;
+import com.revature.dummyapp.models.Product;
 
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-	
-
-private CustomerRepository customerRepository;
+	private CustomerRepository customerRepo;
 	
 	public CustomerServiceImpl(CustomerRepository customerRepository) {
 		super();
-		this.customerRepository = customerRepository;
+		this.customerRepo = customerRepository;
 	}
 
 	@Override
-	public Customer saveCustomer(Customer user) {
-		return customerRepository.save(user);
+	public Customer saveCustomer(Customer customer) {
+	//log.info("Saving new customer: {}", customer.getFirstname());
+		return customerRepo.save(customer);
 	}
 
 	@Override
 	public List<Customer> getAllCustomers() {
-		return customerRepository.findAll();
+		return customerRepo.findAll();
 	}
 
 	@Override
@@ -39,16 +38,17 @@ private CustomerRepository customerRepository;
 //		}else {
 //			throw new NotFoundException("User", "Id", id);
 //		}
-		return customerRepository.findById(id).orElseThrow(() -> 
+		return customerRepo.findById(id).orElseThrow(() -> 
 						new NotFoundException("Customer", "customerid", id));
 		
 	}
 
 	@Override
 	public Customer updateCustomer(Customer customer, long id) {
+		//log.info("Updating customer: {}", customer.getFirstname());
 		
 		// we need to check whether user with given id is exist in DB or not
-		Customer existingUser = customerRepository.findById(id).orElseThrow(
+		Customer existingUser = customerRepo.findById(id).orElseThrow(
 				() -> new NotFoundException("Customer", "customerid", id)); 
 		
 		if(customer.getUsername() != null) {
@@ -68,17 +68,24 @@ private CustomerRepository customerRepository;
 		
 		
 		// save existing user to DB
-		customerRepository.save(existingUser);
+		customerRepo.save(existingUser);
 		return existingUser;
 	}
 
 	@Override
 	public void deleteCustomer(long id) {
+		//log.info("Deleted customer...")
 		
 		// check whether a user exist in a DB or not
-		customerRepository.findById(id).orElseThrow(() -> 
+		customerRepo.findById(id).orElseThrow(() -> 
 								new NotFoundException("Customer", "customerid", id));
-		customerRepository.deleteById(id);
+		customerRepo.deleteById(id);
+	}
+
+	@Override
+	public Product getProduct(long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
