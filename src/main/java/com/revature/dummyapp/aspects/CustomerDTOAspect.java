@@ -13,7 +13,7 @@ import com.revature.dummyapp.models.dtos.CustomerDTO;
 @Aspect
 @Component
 public class CustomerDTOAspect {
-	@Around("controllerMethodsReturningCustomer")
+	/*@Around("controllerMethodsReturningCustomer")
 	public Object customerToCustomerDTO(ProceedingJoinPoint joinpoint) throws Throwable {
 		@SuppressWarnings("unchecked")
 		ResponseEntity<Customer> resp = (ResponseEntity<Customer>) joinpoint.proceed();
@@ -28,5 +28,5 @@ public class CustomerDTOAspect {
 	@Pointcut("execution(org.springframework.http.ResponseEntity<com.revature.dummyapp.models.Customer> "
 			+ "com.revature.dummyapp.controllers..*(..))")
 	public void controllerMethodsReturningCustomer() {}
-
+*/
 }

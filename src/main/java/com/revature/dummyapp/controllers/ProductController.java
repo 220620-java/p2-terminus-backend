@@ -21,8 +21,8 @@ import com.revature.dummyapp.services.CustomerService;
  *
  */
 
-@RestController
-@RequestMapping(path = "/products")
+//@RestController
+//@RequestMapping(path = "/products")
 public class ProductController {
 	/* Fields */
 	private CustomerService customerServ;
