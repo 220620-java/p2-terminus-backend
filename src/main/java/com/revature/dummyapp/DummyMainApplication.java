@@ -3,7 +3,6 @@ package com.revature.dummyapp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.revature.dummyapp.controllers.CustomerController;
 
 @SpringBootApplication(scanBasePackages = {"com.revature"})
 public class DummyMainApplication {

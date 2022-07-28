@@ -1,5 +1,6 @@
 package com.revature.dummyapp.models;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,12 +20,13 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = " firtsname")
+	@Column(name = "firstname")
 	private String firstname;
-	@Column(name = " lastname")
+	
+	@Column(name = "lastname")
 	private String lastname;
 	
-	@Column(name = "password")
+	@Column(name = "passwrd")
 	private String password;
 	
 	@Column(name = "username")
@@ -30,6 +34,10 @@ public class Customer {
 	
 	@Column(name = "email")
 	private String email;
+	
+	@OneToMany
+	@JoinColumn(name="order_id") // defines foreign key relationship between Customers and Orders
+	private List<Order> orders;
 
 	public long getCustomerId() {
 		return id;
@@ -79,9 +87,17 @@ public class Customer {
 		this.email = email;
 	}
 
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, username, password, firstname);
+		return Objects.hash(email, firstname, id, lastname, orders, password, username);
 	}
 
 	@Override
@@ -93,18 +109,15 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		return Objects.equals(email, other.email) && id == other.id && Objects.equals(username, other.username)
-				&& Objects.equals(password, other.password) && Objects.equals(firstname, other.firstname);
+		return Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname) && id == other.id
+				&& Objects.equals(lastname, other.lastname) && Objects.equals(orders, other.orders)
+				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
 
 	@Override
 	public String toString() {
-		return "coustomer [id=" + id + ", firstname=" + firstname + ",lastName= " + lastname + ", password=" + password + ", name=" + username + ", email="
-				+ email + "]";
+		return "Customer [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", password=" + password
+				+ ", username=" + username + ", email=" + email + ", orders=" + orders + "]";
 	}
-	
-	
 
-	
-	
 }
