@@ -7,6 +7,6 @@ import com.revature.dummyapp.models.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long>{
-	public Customer findByUsername(String username);
+	Customer findByUsername(String username);
 
 }
