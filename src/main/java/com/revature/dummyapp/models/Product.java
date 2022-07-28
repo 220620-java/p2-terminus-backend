@@ -18,12 +18,13 @@ import javax.persistence.Table;
  */
 
 @Entity //relates this class to the table in the database
-@Table(name="product")
+@Table(name="products")
 public class Product {
 	/* Fields */
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="product_id")
 	private long productId;
 	
 	@Column(name="product_name")

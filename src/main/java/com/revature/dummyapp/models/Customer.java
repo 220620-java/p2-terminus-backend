@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="customer")
+@Table(name="customers")
 public class Customer {
 	
 	@Id
@@ -36,9 +36,9 @@ public class Customer {
 	@Column(name = "email")
 	private String email;
 	
-	//@OneToMany
-	//@JoinColumn(name="order_id") // defines foreign key relationship between Customers and Orders
-	//private List<Order> orders;
+	@OneToMany
+	@JoinColumn(name="order_id") // defines foreign key relationship between Customers and Orders
+	private List<Order> orders;
 
 	public long getCustomerId() {
 		return id;

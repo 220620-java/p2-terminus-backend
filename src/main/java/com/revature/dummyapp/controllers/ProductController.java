@@ -21,8 +21,8 @@ import com.revature.dummyapp.services.CustomerService;
  *
  */
 
-//@RestController
-//@RequestMapping(path = "/products")
+@RestController
+@RequestMapping(path = "/products")
 public class ProductController {
 	/* Fields */
 	private CustomerService customerServ;
@@ -33,11 +33,11 @@ public class ProductController {
 		this.customerServ = customerServ; 
 	}
 	
-//	@GetMapping
-//	public ResponseEntity<Product> viewAllProducts() {
-//		List<Product> products = customerServ.viewAllProducts();
-//		return ResponseEntity.ok(products);
-//	}
+	//@GetMapping
+	//public ResponseEntity<Product> viewAllProducts() {
+		//List<Product> products = customerServ.viewAllProducts();
+		//return ResponseEntity.ok(products);
+	//}
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
