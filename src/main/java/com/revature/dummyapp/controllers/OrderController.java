@@ -1,5 +1,4 @@
 package com.revature.dummyapp.controllers;
-
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -12,25 +11,25 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.revature.dummyapp.models.Order;
+import com.revature.dummyapp.services.OrderService;
 
-import com.revature.dummyapp.models.Customer;
-import com.revature.dummyapp.services.CustomerService;
 
 @RestController
-@RequestMapping("/customer")
-public class CustomerController {
+@RequestMapping("/order")
+public class OrderController {
 	
-	private CustomerService customerService;
+	private OrderService orderService;
 
-	public CustomerController(CustomerService customerService) {
+	public OrderController(OrderService orderService) {
 		super();
-		this.customerService = customerService;
+		this.orderService = orderService;
 	}
 	
 	// build create customer REST API
 	@PostMapping()
-	public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer){
-		return new ResponseEntity<Customer>(customerService.saveCustomer(customer), HttpStatus.CREATED);
+	public ResponseEntity<Order> saveOrder(@RequestBody Order order){
+		return new ResponseEntity<Order>(orderService.saveOrder(order), HttpStatus.CREATED);
 		
 		/*
 		try {
@@ -44,36 +43,39 @@ public class CustomerController {
 	}
 	
 	// build get all users REST API
-	@GetMapping
-	public List<Customer> getAllCustomers(){
-		return customerService.getAllCustomers();
+	@GetMapping(path = "/getallOrders")
+	public List<Order> getAllOrder(){
+		return orderService.getAllOrders();
 	}
 	
 	// build get user by id REST API
 	// http://localhost:8080/user/1
-	@GetMapping(path = "/getCustomerById{id}")
-	public ResponseEntity<Customer> getCustomerById(@PathVariable("customerid") long customerid){
-		return new ResponseEntity<Customer>(customerService.getCustomerById(customerid), HttpStatus.OK);
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<Order> getOrderById(@PathVariable("orderid") long orderid){
+		return new ResponseEntity<Order>(orderService.getOrderById(orderid), HttpStatus.OK);
 	}
 	
 	// build update user REST API
 	// http://localhost:8080/users/1
-	@PutMapping(path = "/updateCustomer{id}")
-	public ResponseEntity<Customer> updateCustomer(@PathVariable("customerid") long customerid,@RequestBody Customer Customer){
+	@PutMapping(path = "/{id}")
+	public ResponseEntity<Order> updateOrder(@PathVariable("orderid") long orderid,@RequestBody Order Order){
 		System.out.println("test");
-		return new ResponseEntity<Customer>(customerService.updateCustomer(Customer, customerid), HttpStatus.OK);
+		return new ResponseEntity<Order>(orderService.updateOrder(Order, orderid), HttpStatus.OK);
 	}
 	
 	// build delete user REST API
 	// http://localhost:8080/users/1
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteUser(@PathVariable("id") long id){
+	public ResponseEntity<String> deleteUser(@PathVariable("orderid") long orderid){
 		
 		// delete user from DB
-		customerService.deleteCustomer(id);
+		orderService.deleteOrder(orderid);
 		
 		return new ResponseEntity<String>("User deleted successfully!.", HttpStatus.OK);
 	}
 	
 
 }
+
+    
+

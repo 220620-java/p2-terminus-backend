@@ -77,7 +77,7 @@ private CustomerRepository customerRepository;
 		
 		// check whether a user exist in a DB or not
 		customerRepository.findById(id).orElseThrow(() -> 
-								new NotFoundException("Customer", "customerid", id));
+								new NotFoundException("Customer", "customeri", id));
 		customerRepository.deleteById(id);
 	}
 
