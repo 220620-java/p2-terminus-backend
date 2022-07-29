@@ -12,4 +12,8 @@ public interface OrderService {
 	void deleteOrder(long orderid);
 
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cb1e50a3ad9c79434cf4a166b81c06ee64dba329

@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/main/java/com/revature/dummyapp/services/OrderServiceImp.java
 package com.revature.dummyapp.services;
+=======
+package com.revature.dummyapp.services.impl;
+>>>>>>> cb1e50a3ad9c79434cf4a166b81c06ee64dba329:src/main/java/com/revature/dummyapp/services/impl/OrderServiceImp.java
 import com.revature.dummyapp.services.OrderService;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -41,11 +45,16 @@ public class OrderServiceImp implements OrderService {
 
 @Override
 	public Order updateOrder(Order order, long orderid) {
+<<<<<<< HEAD:src/main/java/com/revature/dummyapp/services/OrderServiceImp.java
 		Long id = order.getProductid();
+=======
+		
+>>>>>>> cb1e50a3ad9c79434cf4a166b81c06ee64dba329:src/main/java/com/revature/dummyapp/services/impl/OrderServiceImp.java
 		// we need to check whether user with given id is exist in DB or not
 		Order existingOrder = orderRepository.findById(orderid).orElseThrow(
 				() -> new NotFoundException("Order", "orderid", orderid)); 
 		
+<<<<<<< HEAD:src/main/java/com/revature/dummyapp/services/OrderServiceImp.java
 
 		if(order.getProductid() > -1) {
 			existingOrder.setProductid(order.getProductid());
@@ -55,6 +64,16 @@ public class OrderServiceImp implements OrderService {
 		}
 		if(order.getTotalPrice() != null) {
 			existingOrder.setTotalPrice(order.getTotalPrice());
+=======
+		if(order.getProductId() !=-1) {
+			existingOrder.setProductId(order.getProductId());
+		}
+		if(order.getOrderDate()!= null) {
+			existingOrder.setOrderDate(order.getOrderDate());
+		}
+		if(order.getTotalPriceString() != null) {
+			existingOrder.setTotalPrice(order.getTotalPriceString());
+>>>>>>> cb1e50a3ad9c79434cf4a166b81c06ee64dba329:src/main/java/com/revature/dummyapp/services/impl/OrderServiceImp.java
 		}
 		
 		

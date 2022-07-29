@@ -51,14 +51,14 @@ public class CustomerController {
 	
 	// build get user by id REST API
 	// http://localhost:8080/user/1
-	@GetMapping(path = "/{id}")
+	@GetMapping(path = "/getCustomerById{id}")
 	public ResponseEntity<Customer> getCustomerById(@PathVariable("customerid") long customerid){
 		return new ResponseEntity<Customer>(customerService.getCustomerById(customerid), HttpStatus.OK);
 	}
 	
 	// build update user REST API
 	// http://localhost:8080/users/1
-	@PutMapping(path = "/{id}")
+	@PutMapping(path = "/updateCustomer{id}")
 	public ResponseEntity<Customer> updateCustomer(@PathVariable("customerid") long customerid,@RequestBody Customer Customer){
 		System.out.println("test");
 		return new ResponseEntity<Customer>(customerService.updateCustomer(Customer, customerid), HttpStatus.OK);

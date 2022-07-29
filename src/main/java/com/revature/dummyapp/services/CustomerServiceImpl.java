@@ -77,6 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
 		//log.info("Deleted customer...")
 		
 		// check whether a user exist in a DB or not
+<<<<<<< HEAD:src/main/java/com/revature/dummyapp/services/CustomerServiceImpl.java
 		customerRepo.findById(id).orElseThrow(() -> 
 								new NotFoundException("Customer", "customerid", id));
 		customerRepo.deleteById(id);
@@ -86,6 +87,11 @@ public class CustomerServiceImpl implements CustomerService {
 	public Product getProduct(long id) {
 		// TODO Auto-generated method stub
 		return null;
+=======
+		customerRepository.findById(id).orElseThrow(() -> 
+								new NotFoundException("Customer", "customeri", id));
+		customerRepository.deleteById(id);
+>>>>>>> cb1e50a3ad9c79434cf4a166b81c06ee64dba329:src/main/java/com/revature/dummyapp/services/impl/CustomerServiceImpl.java
 	}
 
 }
