@@ -7,11 +7,11 @@
 		<version>2.7.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>spring.tony</groupId>
-	<artifactId>test-app</artifactId>
+	<groupId>com.revature</groupId>
+	<artifactId>dummy-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>test-app</name>
-	<description>Demo project for Spring Boot</description>
+	<name>dummy-app</name>
+	<description>Spring Boot project for Team Terminus Dummy Store Web Application</description>
 	<properties>
 		<java.version>1.8</java.version>
 		<sonar.organization>220620-java</sonar.organization>
