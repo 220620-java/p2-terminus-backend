@@ -37,7 +37,7 @@ public class Customer {
 	private String email;
 	
 	@OneToMany
-	@JoinColumn(name="order_id") // defines foreign key relationship between Customers and Orders
+	@JoinColumn(name="order_id") // defines foreign key relationship between Customers and Orders///TODO  this is part of the composite key in customerorddr table
 	private List<Order> orders;
 
 	public long getCustomerId() {
