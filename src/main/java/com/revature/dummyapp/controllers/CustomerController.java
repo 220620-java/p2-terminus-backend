@@ -28,7 +28,7 @@ public class CustomerController {
 	}
 
 	// http://localhost:8080/customer/getAllCustomers
-	@GetMapping(path = "/getAllCustomers") // change this whatever you want the path to be
+	@GetMapping() // change this whatever you want the path to be
 	public List<Customer> getAllCustomers() {
 		return customerService.getAllCustomers();
 	}
