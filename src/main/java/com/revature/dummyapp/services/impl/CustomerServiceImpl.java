@@ -1,4 +1,4 @@
-package com.revature.dummyapp.services;
+package com.revature.dummyapp.services.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import com.revature.dummyapp.data.CustomerRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.models.Product;
+import com.revature.dummyapp.services.CustomerService;
 
 
 @Service
@@ -44,12 +45,12 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer updateCustomer(Customer customer, long id) {
+	public Customer updateCustomer(Customer customer) {
 		//log.info("Updating customer: {}", customer.getFirstname());
 		
 		// we need to check whether user with given id is exist in DB or not
-		Customer existingUser = customerRepo.findById(id).orElseThrow(
-				() -> new NotFoundException("Customer", "customerid", id)); 
+		Customer existingUser = customerRepo.findById(customer.getCustomerId()).orElseThrow(
+				() -> new NotFoundException("Customer", "customerid", customer.getCustomerId())); 
 		
 		if(customer.getUsername() != null) {
 			existingUser.setUsername(customer.getUsername());
@@ -63,9 +64,6 @@ public class CustomerServiceImpl implements CustomerService {
 		if(customer.getEmail() != null) {
 			existingUser.setEmail(customer.getEmail());
 		}
-		
-		
-		
 		
 		// save existing user to DB
 		customerRepo.save(existingUser);

@@ -13,67 +13,78 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.dummyapp.exceptions.UsernameTakenException;
 import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.services.CustomerService;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping(path = "/customer")
 public class CustomerController {
-	
+
 	private CustomerService customerService;
 
 	public CustomerController(CustomerService customerService) {
-		super();
 		this.customerService = customerService;
 	}
-	
-	// build create customer REST API
+
+	// http://localhost:8080/customer/getAllCustomers
+	@GetMapping(path = "/getAllCustomers") // change this whatever you want the path to be
+	public List<Customer> getAllCustomers() {
+		return customerService.getAllCustomers();
+	}
+
+	// http://localhost:8080/customer/1
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<Customer> getCustomerById(@PathVariable long id) {
+		return new ResponseEntity<Customer>(customerService.getCustomerById(id), HttpStatus.OK);
+	}
+
+	// http://localhost:8080/customer
 	@PostMapping()
-	public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer){
-		return new ResponseEntity<Customer>(customerService.saveCustomer(customer), HttpStatus.CREATED);
-		
-		/*
+	public ResponseEntity<Customer> registerCustomer(@RequestBody Customer customer) {
+		// return new ResponseEntity<Customer>(customerService.saveCustomer(customer),
+		// HttpStatus.CREATED);
+		// ERROR: JSON parse error: Cannot deserialize value of type
+		// `com.revature.dummyapp.models.Customer`
+
 		try {
-			user = userService.saveUser(user);
-		} catch (Exception e) {
+			customer = customerService.saveCustomer(customer);
+		} catch (UsernameTakenException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(user);
-		 */
+		return ResponseEntity.status(HttpStatus.CREATED).body(customer);
+
 	}
-	
-	// build get all users REST API
-	@GetMapping
-	public List<Customer> getAllCustomers(){
-		return customerService.getAllCustomers();
-	}
-	
-	// build get user by id REST API
-	// http://localhost:8080/user/1
-	@GetMapping(path = "/{id}")
-	public ResponseEntity<Customer> getCustomerById(@PathVariable("customerid") long customerid){
-		return new ResponseEntity<Customer>(customerService.getCustomerById(customerid), HttpStatus.OK);
-	}
-	
-	// build update user REST API
-	// http://localhost:8080/users/1
+
+	// http://localhost:8080/customer/1
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<Customer> updateCustomer(@PathVariable("customerid") long customerid,@RequestBody Customer Customer){
-		System.out.println("test");
-		return new ResponseEntity<Customer>(customerService.updateCustomer(Customer, customerid), HttpStatus.OK);
+	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer, @PathVariable long id) {
+		// System.out.println("test");
+		// return new ResponseEntity<Customer>(customerService.updateCustomer(customer),
+		// HttpStatus.OK);
+
+		if (customer.getCustomerId() == id) {
+			customer = customerService.updateCustomer(customer);
+			if (customer != null) {
+				return ResponseEntity.ok(customer);
+			} else {
+				return ResponseEntity.badRequest().build();
+			}
+		} else {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		}
+
 	}
-	
-	// build delete user REST API
-	// http://localhost:8080/users/1
-	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteCustomer(@PathVariable("id") long id){
-		
+
+	// http://localhost:8080/customer/1
+	@DeleteMapping(path = "/{id}")
+	public ResponseEntity<String> deleteCustomer(@PathVariable long id) {
+
 		// delete user from DB
 		customerService.deleteCustomer(id);
-		
-		return new ResponseEntity<String>("User deleted successfully!.", HttpStatus.OK);
+
+		return new ResponseEntity<String>("Customer deleted successfully!.", HttpStatus.OK);
 	}
-	
 
 }
