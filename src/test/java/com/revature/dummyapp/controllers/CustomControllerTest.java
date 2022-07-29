@@ -1,6 +1,6 @@
 package com.revature.dummyapp.controllers;
 
-import static org.junit.jupiter.api.Assertions.fail;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -46,10 +46,10 @@ class CustomControllerTest {
 		
 	}
 
-	@Test
-	void testGetAllCustomers() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	void testGetAllCustomers() {
+//		fail("Not yet implemented");
+//	}
 
 	@Test
 	void testGetCustomerById() throws Exception {
@@ -63,14 +63,14 @@ class CustomControllerTest {
 	
 	}
 
-	@Test
-	void testUpdateCustomer() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testDeleteCustomer() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	void testUpdateCustomer() {
+//		fail("Not yet implemented");
+//	}
+//
+//	@Test
+//	void testDeleteCustomer() {
+//		fail("Not yet implemented");
+//	}
 
 }
