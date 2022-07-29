@@ -17,7 +17,7 @@
 	</properties>
 	
 	<properties>
-        <sonar.organization>220620-java</sonar.organization>
+                <sonar.organization>220620-java</sonar.organization>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         </properties>
 	<dependencies>
