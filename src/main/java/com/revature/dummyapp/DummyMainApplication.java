@@ -3,7 +3,11 @@ package com.revature.dummyapp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
+/**
+ * 
+ * @author Team Terminus
+ *
+ */
 @SpringBootApplication(scanBasePackages = {"com.revature"})
 public class DummyMainApplication {
 

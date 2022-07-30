@@ -1,5 +1,6 @@
 package com.revature.dummyapp.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,27 +13,47 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Tony Wiedman
+ * @author Devin
+ * @author Berhanu
+ *
+ */
 @Entity
-@Table(name= "orders")
+@Table(name = "orders")
 public class Order {
 
-    @Id
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+	@Column(name = "id")
 	private long orderid;
-	
-	@Column(name = "product_id")
-	private long productid;
-	
-    @Column(name = "order_date")
+
+	@Column(name = "order_date")
 	private String orderdate;
-	
+
 	@Column(name = "total_price")
 	private Double totalPrice;
-	
+
 	@OneToMany
-	@JoinColumn(name="product_id")
+	@JoinColumn(name = "order_id")
 	private List<Product> products;
+
+	public Order() {
+		super();
+		this.orderid = 0;
+		this.orderdate = "";
+		this.totalPrice = 0.0;
+		this.products = new ArrayList<>();
+	}
+
+	public Order(long orderid, String orderdate, Double totalPrice, List<Product> products) {
+		super();
+		this.orderid = orderid;
+		this.orderdate = orderdate;
+		this.totalPrice = totalPrice;
+		this.products = products;
+	}
 
 	public long getOrderid() {
 		return orderid;
@@ -40,14 +61,6 @@ public class Order {
 
 	public void setOrderid(long orderid) {
 		this.orderid = orderid;
-	}
-
-	public long getProductid() {
-		return productid;
-	}
-
-	public void setProductid(long productid) {
-		this.productid = productid;
 	}
 
 	public String getOrderdate() {
@@ -75,14 +88,8 @@ public class Order {
 	}
 
 	@Override
-	public String toString() {
-		return "Order [orderid=" + orderid + ", productid=" + productid + ", orderdate=" + orderdate + ", totalPrice="
-				+ totalPrice + ", products=" + products + "]";
-	}
-
-	@Override
 	public int hashCode() {
-		return Objects.hash(orderdate, orderid, productid, products, totalPrice);
+		return Objects.hash(orderdate, orderid, products, totalPrice);
 	}
 
 	@Override
@@ -94,13 +101,14 @@ public class Order {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		return Objects.equals(orderdate, other.orderdate) && orderid == other.orderid && productid == other.productid
+		return Objects.equals(orderdate, other.orderdate) && orderid == other.orderid
 				&& Objects.equals(products, other.products) && Objects.equals(totalPrice, other.totalPrice);
 	}
-	
 
-	
-	
+	@Override
+	public String toString() {
+		return "Order [orderid=" + orderid + ", orderdate=" + orderdate + ", totalPrice=" + totalPrice + ", products="
+				+ products + "]";
+	}
 
-    
 }

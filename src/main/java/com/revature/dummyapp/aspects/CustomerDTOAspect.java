@@ -1,5 +1,5 @@
 package com.revature.dummyapp.aspects;
-
+/*
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.models.dtos.CustomerDTO;
-
+*/
 // @Aspect
 // @Component
 // public class CustomerDTOAspect {

@@ -5,10 +5,10 @@ import java.util.Objects;
 import com.revature.dummyapp.models.Customer;
 
 /**
- * DTO (Data Transfer Object) to prepare 
- * Customer object to be sent in HTTP response
+ * DTO (Data Transfer Object) to prepare Customer object to be sent in HTTP
+ * response
  * 
- * @author devin
+ * @author Devin
  */
 
 public class CustomerDTO {
@@ -16,29 +16,29 @@ public class CustomerDTO {
 	private long customerId;
 	private String username;
 	private String email;
-	
+
 	/* Constructors */
 	public CustomerDTO() {
 		this.customerId = 0;
 		this.username = "";
 		this.email = "";
 	}
-	
+
 	public CustomerDTO(long id, String username, String email) {
 		this.customerId = id;
 		this.username = username;
 		this.email = email;
 	}
-	
+
 	public CustomerDTO(Customer customer) {
 		setCustomerId(customer.getCustomerId());
 		setUsername(customer.getUsername());
 		setEmail(customer.getEmail());
-	
+
 	}
-	
+
 	/* Public Methods (Getters & Setters) */
-		
+
 	/**
 	 * 
 	 * @return long
@@ -46,7 +46,7 @@ public class CustomerDTO {
 	public long getCustomerId() {
 		return customerId;
 	}
-	
+
 	/**
 	 * 
 	 * @param customerId
@@ -54,7 +54,7 @@ public class CustomerDTO {
 	public void setCustomerId(long customerId) {
 		this.customerId = customerId;
 	}
-	
+
 	/**
 	 * 
 	 * @return String
@@ -62,7 +62,7 @@ public class CustomerDTO {
 	public String getUsername() {
 		return username;
 	}
-	
+
 	/**
 	 * 
 	 * @param username
@@ -70,7 +70,7 @@ public class CustomerDTO {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	/**
 	 * 
 	 * @return String
@@ -110,6 +110,4 @@ public class CustomerDTO {
 		return "CustomerDTO [customerId=" + customerId + ", username=" + username + ", email=" + email + "]";
 	}
 
-	
-	
 }
