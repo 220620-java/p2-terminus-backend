@@ -36,7 +36,16 @@ public class CustomerController {
 	// http://localhost:8080/customer/1
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Customer> getCustomerById(@PathVariable long id) {
-		return new ResponseEntity<Customer>(customerService.getCustomerById(id), HttpStatus.OK);
+		Customer customer = customerService.getCustomerById(id);
+		
+		
+		if (customer != null) {
+			// send a 200 status code with the user object as the response body
+			return ResponseEntity.ok(customer);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+
 	}
 
 	// http://localhost:8080/customer

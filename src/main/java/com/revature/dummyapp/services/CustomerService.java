@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.revature.dummyapp.exceptions.UsernameTakenException;
 import com.revature.dummyapp.models.Customer;
+import com.revature.dummyapp.models.Order;
 import com.revature.dummyapp.models.Product;
 
 public interface CustomerService {
@@ -12,5 +13,5 @@ public interface CustomerService {
 	Customer getCustomerById(long customerid);
 	Customer updateCustomer(Customer customer);
 	void deleteCustomer(long customerid);
-	Product getProduct(long id);
+	//Order getOrder(long id);
 }

@@ -1,12 +1,14 @@
 package com.revature.dummyapp.services.impl;
-
+import java.util.Optional;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.revature.dummyapp.data.CustomerRepository;
+import com.revature.dummyapp.data.OrderRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.models.Customer;
+import com.revature.dummyapp.models.Order;
 import com.revature.dummyapp.models.Product;
 import com.revature.dummyapp.services.CustomerService;
 
@@ -14,10 +16,12 @@ import com.revature.dummyapp.services.CustomerService;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepository customerRepo;
+	private OrderRepository orderRepo;
 	
-	public CustomerServiceImpl(CustomerRepository customerRepository) {
+	public CustomerServiceImpl(CustomerRepository customerRepository, OrderRepository orderRepository) {
 		super();
 		this.customerRepo = customerRepository;
+		this.orderRepo = orderRepository;
 	}
 
 	@Override
@@ -33,14 +37,14 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer getCustomerById(long id) {
-//		Optional<User> user = userRepository.findById(id);
-//		if(user.isPresent()) {
-//			return user.get();
-//		}else {
-//			throw new NotFoundException("User", "Id", id);
-//		}
-		return customerRepo.findById(id).orElseThrow(() -> 
-						new NotFoundException("Customer", "customerid", id));
+	Optional<Customer> user = customerRepo.findById(id);
+		if(user.isPresent()) {
+			return user.get();
+		}else {
+			throw new NotFoundException("User", "Id", id);
+		}
+		//return customerRepo.findById(id).orElseThrow(() -> 
+		//				new NotFoundException("Customer", "customerid", id));
 		
 	}
 
@@ -80,10 +84,15 @@ public class CustomerServiceImpl implements CustomerService {
 		customerRepo.deleteById(id);
 	}
 
-	@Override
-	public Product getProduct(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+	//@Override
+	//public Order getOrder(long id) {
+	//	Optional<Order> orderOpt = Optional.ofNullable(orderRepo.findByCustomerId(id));
+	//	
+	//	if (orderOpt.isPresent()) {
+	//		return orderOpt.get();
+	//	} else return null;
+	//
+	//}
 
 }
