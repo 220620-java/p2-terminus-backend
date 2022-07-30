@@ -13,6 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Tony Wiedman
+ * @author Devin
+ * @author Berhanu
+ *
+ */
 @Entity
 @Table(name = "orders")
 public class Order {

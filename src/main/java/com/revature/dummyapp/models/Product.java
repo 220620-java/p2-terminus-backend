@@ -14,7 +14,8 @@ import javax.persistence.Table;
  * and purchase
  * 
  * @author devin
- * @author tony wiedman
+ * @author Tony Wiedman
+ * 
  */
 
 @Entity // relates this class to the table in the database
@@ -43,9 +44,6 @@ public class Product {
 		this.endpoint = endpoint;
 	}
 
-	
-	
-	
 	public long getId() {
 		return id;
 	}

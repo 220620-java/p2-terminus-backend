@@ -1,5 +1,4 @@
 package com.revature.dummyapp.services.impl;
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -9,6 +8,11 @@ import com.revature.dummyapp.models.dtos.CustomerDTO;
 import com.revature.dummyapp.services.TokenService;
 
 
+/**
+ * 
+ * @author Tony Wiedman
+ *
+ */
 @Service
 public class TokenServiceImpl implements TokenService {
 

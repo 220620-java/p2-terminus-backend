@@ -8,6 +8,12 @@ import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.models.Order;
 import com.revature.dummyapp.services.OrderService;
 
+/**
+ * 
+ * @author Devin
+ * @author Tony Wiedman
+ *
+ */
 public class OrderServiceImpl implements OrderService {
 	private OrderRepository orderRepo;
 	

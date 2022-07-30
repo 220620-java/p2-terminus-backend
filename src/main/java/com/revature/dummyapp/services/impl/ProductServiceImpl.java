@@ -6,6 +6,12 @@ import com.revature.dummyapp.data.ProductRepository;
 import com.revature.dummyapp.models.Product;
 import com.revature.dummyapp.services.ProductService;
 
+/**
+ * 
+ * @author Devin
+ * @author Tony Wiedman
+ *
+ */
 public class ProductServiceImpl implements ProductService {
 	
 private ProductRepository productRepo;

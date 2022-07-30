@@ -13,35 +13,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Tony Wiedman
+ * @auhor Devin
+ *
+ */
 @Entity
-@Table(name="customers")
+@Table(name = "customers")
 public class Customer {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
-	
+
 	@Column(name = "first_name")
 	private String firstname;
-	
+
 	@Column(name = "last_name")
 	private String lastname;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "username")
 	private String username;
-	
+
 	@Column(name = "passwd")
 	private String password;
-	
+
 	@OneToMany
-	@JoinColumn(name="customer_id")
+	@JoinColumn(name = "customer_id")
 	private List<Order> orders;
 
-	
 	public Customer() {
 		super();
 		this.id = 0;
@@ -50,20 +55,24 @@ public class Customer {
 		this.email = "";
 		this.username = "";
 		this.password = "";
-		//this.role = new Role();
+		// this.role = new Role();
 		this.orders = new ArrayList<>();
 	}
-	
+
+	/**
+	 * OVERLOADED CONSTRUCTOR FOR CUSTOMER LOGIN
+	 * 
+	 * @param username
+	 * @param password
+	 */
 	public Customer(String username, String password) {
 		super();
 		this.id = 0;
 		this.username = username;
 		this.password = password;
-		//this.role = new Role();
+		// this.role = new Role();
 		this.orders = new ArrayList<>();
 	}
-
-
 
 	public long getCustomerId() {
 		return id;
@@ -80,11 +89,11 @@ public class Customer {
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
-	
-	public String getLastname(){
+
+	public String getLastname() {
 		return lastname;
 	}
-	
+
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
@@ -112,7 +121,6 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public List<Order> getOrders() {
 		return orders;
