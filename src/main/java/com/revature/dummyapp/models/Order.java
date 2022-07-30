@@ -1,5 +1,7 @@
 package com.revature.dummyapp.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,27 +28,25 @@ public class Order {
 	@Column(name = "total_price")
 	private Double totalPrice;
 
-	@Column(name = "products")
-	private String products;
-	
-	
+	@OneToMany
+	@JoinColumn(name = "order_id")
+	private List<Product> products;
+
 	public Order() {
 		super();
 		this.orderid = 0;
 		this.orderdate = "";
 		this.totalPrice = 0.0;
-		this.products = "";
+		this.products = new ArrayList<>();
 	}
 
-
-	public Order(long orderid, String orderdate, Double totalPrice, String products) {
+	public Order(long orderid, String orderdate, Double totalPrice, List<Product> products) {
 		super();
 		this.orderid = orderid;
 		this.orderdate = orderdate;
 		this.totalPrice = totalPrice;
 		this.products = products;
 	}
-
 
 	public long getOrderid() {
 		return orderid;
@@ -70,11 +72,11 @@ public class Order {
 		this.totalPrice = totalPrice;
 	}
 
-	public String getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(String products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 

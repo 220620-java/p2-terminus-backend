@@ -10,136 +10,61 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * This class represents the products a
- * Customer will be able to add to a cart and purchase
+ * This class represents the products a Customer will be able to add to a cart
+ * and purchase
  * 
  * @author devin
- *
+ * @author tony wiedman
  */
 
-@Entity //relates this class to the table in the database
-@Table(name="products")
+@Entity // relates this class to the table in the database
+@Table(name = "products")
 public class Product {
 	/* Fields */
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="product_id")
-	private long productId;
-	
-	@Column(name="product_name")
-	private String productName;
-	
-	@Column(name="description")
-	private String description;
-	
-	@Column(name="stock_quantity")
-	private int stockQuantity;
-	
-	@Column(name="product_price")
-	private double price;
-	
+	@Column(name = "id")
+	private long id;
+
+	@Column(name = "endpoint")
+	private String endpoint;
+
 	/* Constructors */
-	
+
 	public Product() {
-		this.productId = 0;
-		this.productName = "";
-		this.description = "";
-		this.price = 0.0;
-	}
-	
-	public Product(String name, String description, double price) {
-		this.productId = 0;
-		this.productName = name;
-		this.description = description;
-		this.price = price;
-	}
-	
-	/* Public Methods (Getters & Setters) */
-	
-	/**
-	 * 
-	 * @return long product id
-	 */
-	public long getProductId() {
-		return productId;
-	}
-	
-	/**
-	 * 
-	 * @param productId
-	 */
-	public void setProductId(long productId) {
-		this.productId = productId;
-	}
-	
-	/**
-	 * 
-	 * @return String
-	 */
-	public String getProductName() {
-		return productName;
-	}
-	
-	/**
-	 * 
-	 * @param productName
-	 */
-	public void setProductName(String productName) {
-		this.productName = productName;
+		this.id = 0;
+		this.endpoint = "";
 	}
 
-	/**
-	 * 
-	 * @return String
-	 */
-	public String getDescription() {
-		return description;
+	public Product(long id, String endpoint) {
+		super();
+		this.id = id;
+		this.endpoint = endpoint;
 	}
 
-	/**
-	 * 
-	 * @param description
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
-	 * 
-	 * @return integer
-	 */
-	public int getStockQuantity() {
-		return stockQuantity;
-	}
 	
-	/**
-	 * 
-	 * @param stock_quantity
-	 */
-	public void setStockQuantity(int stockQuantity) {
-		this.stockQuantity = stockQuantity;
+	
+	
+	public long getId() {
+		return id;
 	}
 
-	/**
-	 * 
-	 * @return double
-	 */
-	public double getPrice() {
-		return price;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	/**
-	 * 
-	 * @param price (double)
-	 */
-	public void setPrice(double price) {
-		this.price = price;
+	public String getEndpoint() {
+		return endpoint;
+	}
+
+	public void setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, price, productId, productName, stockQuantity);
+		return Objects.hash(endpoint, id);
 	}
 
 	@Override
@@ -151,17 +76,12 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		return Objects.equals(description, other.description)
-				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
-				&& productId == other.productId && Objects.equals(productName, other.productName)
-				&& stockQuantity == other.stockQuantity;
+		return Objects.equals(endpoint, other.endpoint) && id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", description=" + description
-				+ ", stock_quantity=" + stockQuantity + ", price=" + price + "]";
+		return "Product [id=" + id + ", endpoint=" + endpoint + "]";
 	}
-
 
 }
