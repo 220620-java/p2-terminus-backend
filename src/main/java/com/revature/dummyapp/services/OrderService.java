@@ -1,7 +1,6 @@
 package com.revature.dummyapp.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.revature.dummyapp.models.Order;
 
@@ -33,7 +32,7 @@ public interface OrderService {
 	 * @param customerid
 	 * @return
 	 */
-	List<Order> getAllOrders(long customerid);
+	List<Order> getAllOrders();
 
 	/**
 	 * 
@@ -41,7 +40,7 @@ public interface OrderService {
 	 * @param orderid
 	 * @return
 	 */
-	Order updateOrder(Order order, long orderid);
+	Order updateOrder(Order order);
 
 	/**
 	 * 

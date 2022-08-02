@@ -18,7 +18,7 @@ public interface CustomerService {
 	 * @return
 	 * @throws UsernameTakenException
 	 */
-	Customer saveCustomer(Customer customer) throws UsernameTakenException;
+	Customer registerCustomer(Customer customer) throws UsernameTakenException;
 	
 	/**
 	 * 

@@ -29,6 +29,7 @@ import com.revature.dummyapp.services.CustomerService;
 public class CustomerController {
 
 	private CustomerService customerService;
+	//private CustomerDTO customer = new CustomerDTO();
 
 	public CustomerController(CustomerService customerService) {
 		this.customerService = customerService;
@@ -77,7 +78,7 @@ public class CustomerController {
 		// `com.revature.dummyapp.models.Customer`
 
 		try {
-			customer = customerService.saveCustomer(customer);
+			customer = customerService.registerCustomer(customer);
 		} catch (UsernameTakenException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
