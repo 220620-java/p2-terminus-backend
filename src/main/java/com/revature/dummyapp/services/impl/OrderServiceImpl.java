@@ -3,6 +3,8 @@ package com.revature.dummyapp.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.revature.dummyapp.data.OrderRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.models.Order;
@@ -14,6 +16,7 @@ import com.revature.dummyapp.services.OrderService;
  * @author Tony Wiedman
  *
  */
+@Service
 public class OrderServiceImpl implements OrderService {
 	private OrderRepository orderRepo;
 	
