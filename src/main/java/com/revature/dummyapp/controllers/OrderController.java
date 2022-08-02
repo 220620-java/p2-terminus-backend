@@ -29,7 +29,6 @@ public class OrderController {
 	private OrderService orderService;
 
 	public OrderController(OrderService orderService) {
-		super();
 		this.orderService = orderService;
 	}
 
