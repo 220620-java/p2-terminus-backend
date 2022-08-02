@@ -5,7 +5,7 @@ import java.util.Objects;
 import com.revature.dummyapp.models.Customer;
 
 /**
- * DTO (Data Transfer Object) to prepare Customer object to be sent in HTTP
+ * Customer DTO (Data Transfer Object) to prepare Customer object to be sent in HTTP
  * response
  * 
  * @author Devin

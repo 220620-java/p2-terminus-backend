@@ -18,38 +18,52 @@ public class OrderServiceImpl implements OrderService {
 	private OrderRepository orderRepo;
 	
 	public OrderServiceImpl(OrderRepository orderRepository) {
-		super();
 		this.orderRepo = orderRepository;
 	}
 	@Override
 	public Order saveOrder(Order order) {
-		// TODO Auto-generated method stub
+		// log.info("Saving new order with id: {}", order.getOrderId());
 		return orderRepo.save(order);
 	}
 
 	@Override
-	public List<Order> getAllOrders(long customerid) {
-		// TODO Auto-generated method stub
+	public List<Order> getAllOrders() {
 		return orderRepo.findAll();
 	}
 
 	@Override
-	public Order getOrderById(long customerid) {
-		// TODO Auto-generated method stub
-		//return orderRepo.findByCustomerId(customerid);
-		return null;
+	public Order getOrderById(long id) {
+		Optional<Order> order = orderRepo.findById(id);
+		if (order.isPresent()) {
+			return order.get();
+		} else {
+			throw new NotFoundException("Customer", "Id", id);
+		}
 	}
 
 	@Override
-	public Order updateOrder(Order order, long orderid) {
-		// TODO Auto-generated method stub
-		return null;
+	public Order updateOrder(Order order) {
+			Order existingOrder = orderRepo.findById(order.getOrderId())
+					.orElseThrow(() -> new NotFoundException("Customer", "customerid", order.getOrderId()));
+
+			if (order.getOrderDate() != null) {
+				existingOrder.setOrderDate(order.getOrderDate());
+			}
+			if (order.getTotalPrice() != null) {
+				existingOrder.setTotalPrice(order.getTotalPrice());
+			}
+			if (order.getProducts() != null) {
+				existingOrder.setProducts(order.getProducts());
+			}
+
+			orderRepo.save(existingOrder);
+			return existingOrder;
 	}
 
 	@Override
-	public void deleteOrder(long orderid) {
-		// TODO Auto-generated method stub
-		
+	public void deleteOrder(long id) {
+		orderRepo.findById(id).orElseThrow(() -> new NotFoundException("Order", "orderid", id));
+		orderRepo.deleteById(id);
 	}
 
 }

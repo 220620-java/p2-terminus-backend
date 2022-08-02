@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.revature.dummyapp.data.CustomerRepository;
 import com.revature.dummyapp.data.OrderRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
+import com.revature.dummyapp.exceptions.UsernameTakenException;
 import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.services.CustomerService;
 
@@ -19,18 +20,22 @@ import com.revature.dummyapp.services.CustomerService;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepository customerRepo;
-	private OrderRepository orderRepo;
 
-	public CustomerServiceImpl(CustomerRepository customerRepository, OrderRepository orderRepository) {
-		super();
+	public CustomerServiceImpl(CustomerRepository customerRepository) {
 		this.customerRepo = customerRepository;
-		this.orderRepo = orderRepository;
 	}
 
 	@Override
-	public Customer saveCustomer(Customer customer) {
+	public Customer registerCustomer(Customer customer) throws UsernameTakenException {
 		// log.info("Saving new customer: {}", customer.getFirstname());
-		return customerRepo.save(customer);
+		customer.setCustomerId(0);
+		customer = customerRepo.save(customer);
+		
+		if(customer.getCustomerId() == 0) {
+			throw new UsernameTakenException();
+		}
+		
+		return customer;
 	}
 
 	@Override
@@ -44,7 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
 		if (user.isPresent()) {
 			return user.get();
 		} else {
-			throw new NotFoundException("User", "Id", id);
+			throw new NotFoundException("Customer", "Id", id);
 		}
 		// return customerRepo.findById(id).orElseThrow(() ->
 		// new NotFoundException("Customer", "customerid", id));

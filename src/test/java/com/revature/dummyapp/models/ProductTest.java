@@ -1,10 +1,10 @@
 package com.revature.dummyapp.models;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+
+@SpringBootTest(classes = Product.class)
 class ProductTest {
 	
 	Product product;

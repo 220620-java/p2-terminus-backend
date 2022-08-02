@@ -27,10 +27,10 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private long orderid;
+	private long orderId;
 
 	@Column(name = "order_date")
-	private String orderdate;
+	private String orderDate;
 
 	@Column(name = "total_price")
 	private Double totalPrice;
@@ -41,34 +41,34 @@ public class Order {
 
 	public Order() {
 		super();
-		this.orderid = 0;
-		this.orderdate = "";
+		this.orderId = 0;
+		this.orderDate = "";
 		this.totalPrice = 0.0;
 		this.products = new ArrayList<>();
 	}
 
 	public Order(long orderid, String orderdate, Double totalPrice, List<Product> products) {
 		super();
-		this.orderid = orderid;
-		this.orderdate = orderdate;
+		this.orderId = orderid;
+		this.orderDate = orderdate;
 		this.totalPrice = totalPrice;
 		this.products = products;
 	}
 
-	public long getOrderid() {
-		return orderid;
+	public long getOrderId() {
+		return orderId;
 	}
 
-	public void setOrderid(long orderid) {
-		this.orderid = orderid;
+	public void setOrderId(long orderid) {
+		this.orderId = orderid;
 	}
 
-	public String getOrderdate() {
-		return orderdate;
+	public String getOrderDate() {
+		return orderDate;
 	}
 
-	public void setOrderdate(String orderdate) {
-		this.orderdate = orderdate;
+	public void setOrderDate(String orderdate) {
+		this.orderDate = orderdate;
 	}
 
 	public Double getTotalPrice() {
@@ -89,7 +89,7 @@ public class Order {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(orderdate, orderid, products, totalPrice);
+		return Objects.hash(orderDate, orderId, products, totalPrice);
 	}
 
 	@Override
@@ -101,13 +101,13 @@ public class Order {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		return Objects.equals(orderdate, other.orderdate) && orderid == other.orderid
+		return Objects.equals(orderDate, other.orderDate) && orderId == other.orderId
 				&& Objects.equals(products, other.products) && Objects.equals(totalPrice, other.totalPrice);
 	}
 
 	@Override
 	public String toString() {
-		return "Order [orderid=" + orderid + ", orderdate=" + orderdate + ", totalPrice=" + totalPrice + ", products="
+		return "Order [orderid=" + orderId + ", orderDate=" + orderDate + ", totalPrice=" + totalPrice + ", products="
 				+ products + "]";
 	}
 
