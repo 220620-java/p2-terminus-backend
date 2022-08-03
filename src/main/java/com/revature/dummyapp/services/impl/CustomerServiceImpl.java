@@ -101,5 +101,17 @@ public class CustomerServiceImpl implements CustomerService {
 	// } else return null;
 	//
 	// }
+	
+	@Override
+	public Customer logIn(String username, String password) {
+		Customer customer = customerRepo.findByUsername(username);
+		if (customer != null && (password!=null && password.equals(customer.getPassword()))) {
+			return customer;
+		} else {
+			return null;
+		}
+	}
+
+	
 
 }
