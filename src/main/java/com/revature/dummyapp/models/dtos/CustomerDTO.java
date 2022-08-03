@@ -75,6 +75,7 @@ public class CustomerDTO {
 		setId(customer.getId());
 		setFirstname(customer.getFirstname());
 		setLastname(customer.getLastname());
+		setEmail(customer.getEmail());
 		setUsername(customer.getUsername());
 		setPassword(customer.getPassword());
 		setRole(customer.getRole());
