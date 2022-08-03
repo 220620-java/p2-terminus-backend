@@ -60,25 +60,35 @@ public class CustomerServiceImpl implements CustomerService {
 		// log.info("Updating customer: {}", customer.getFirstname());
 
 		// we need to check whether user with given id is exist in DB or not
-		Customer existingUser = customerRepo.findById(customer.getCustomerId())
-				.orElseThrow(() -> new NotFoundException("Customer", "customerid", customer.getCustomerId()));
+//		Customer existingUser = customerRepo.findById(customer.getCustomerId())
+//				.orElseThrow(() -> new NotFoundException("Customer", "customerid", customer.getCustomerId()));
+//
+//		if (customer.getUsername() != null) {
+//			existingUser.setUsername(customer.getUsername());
+//		}
+//		if (customer.getPassword() != null) {
+//			existingUser.setPassword(customer.getPassword());
+//		}
+//		if (customer.getFirstname() != null) {
+//			existingUser.setFirstname(customer.getFirstname());
+//		}
+//		if (customer.getEmail() != null) {
+//			existingUser.setEmail(customer.getEmail());
+//		}
+//
+//		// save existing user to DB
+//		customerRepo.save(existingUser);
+//		return existingUser;
+		
+		if (customerRepo.findById(customer.getId()).isPresent()) {
+				customerRepo.save(customer);
+			
+			Optional<Customer> customerOpt = customerRepo.findById(customer.getId());
+			if (customerOpt.isPresent())
+				return customerOpt.get();
+		}
+		return null;
 
-		if (customer.getUsername() != null) {
-			existingUser.setUsername(customer.getUsername());
-		}
-		if (customer.getPassword() != null) {
-			existingUser.setPassword(customer.getPassword());
-		}
-		if (customer.getFirstname() != null) {
-			existingUser.setFirstname(customer.getFirstname());
-		}
-		if (customer.getEmail() != null) {
-			existingUser.setEmail(customer.getEmail());
-		}
-
-		// save existing user to DB
-		customerRepo.save(existingUser);
-		return existingUser;
 	}
 
 	@Override
@@ -88,5 +98,15 @@ public class CustomerServiceImpl implements CustomerService {
 		// check whether a user exist in a DB or not
 		customerRepo.findById(id).orElseThrow(() -> new NotFoundException("Customer", "customerid", id));
 		customerRepo.deleteById(id);
+	}
+
+	@Override
+	public Customer logIn(String username, String password) {
+		Customer customer = customerRepo.findByUsername(username);
+		if (customer != null && (password!=null && password.equals(customer.getPassword()))) {
+			return customer;
+		} else {
+			return null;
+		}
 	}
 }
