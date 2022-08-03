@@ -46,4 +46,11 @@ public interface CustomerService {
 	 */
 	void deleteCustomer(long customerid);
 	//Order getOrder(long id);
+/**
+ * 
+ * @param username
+ * @param password
+ * @return
+ */
+	Customer logIn(String username, String password);
 }
