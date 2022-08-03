@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.revature.dummyapp.data.CustomerRepository;
-import com.revature.dummyapp.data.OrderRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.exceptions.UsernameTakenException;
 import com.revature.dummyapp.models.Customer;
@@ -90,16 +89,4 @@ public class CustomerServiceImpl implements CustomerService {
 		customerRepo.findById(id).orElseThrow(() -> new NotFoundException("Customer", "customerid", id));
 		customerRepo.deleteById(id);
 	}
-
-	// @Override
-	// public Order getOrder(long id) {
-	// Optional<Order> orderOpt =
-	// Optional.ofNullable(orderRepo.findByCustomerId(id));
-	//
-	// if (orderOpt.isPresent()) {
-	// return orderOpt.get();
-	// } else return null;
-	//
-	// }
-
 }
