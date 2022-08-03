@@ -4,12 +4,14 @@ import java.util.Optional;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.dummyapp.data.CustomerRepository;
 import com.revature.dummyapp.data.OrderRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.exceptions.UsernameTakenException;
 import com.revature.dummyapp.models.Customer;
+import com.revature.dummyapp.models.Order;
 import com.revature.dummyapp.services.CustomerService;
 
 /**
@@ -20,9 +22,12 @@ import com.revature.dummyapp.services.CustomerService;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepository customerRepo;
+	private OrderRepository orderRepo;
+	
 
-	public CustomerServiceImpl(CustomerRepository customerRepository) {
+	public CustomerServiceImpl(CustomerRepository customerRepository, OrderRepository orderRepository) {
 		this.customerRepo = customerRepository;
+		this.orderRepo = orderRepository;
 	}
 
 	@Override
@@ -113,5 +118,27 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	
+	
+	// COMPLETE ORDER FOR CUSTOMER
+	@Override
+	public Customer completeOrder(Order order, Customer customer) {
+		if (customer == null || order == null) {
+			return null;
+		}
+
+		//get all the users orders
+		List<Order> orders = customer.getOrders();
+		
+		//add current order to the current users orders
+		orders.add(order);
+		customer.setOrders(orders);
+		
+		//Save to customer and order to db
+		orderRepo.save(order);
+		customerRepo.save(customer);
+		
+		return customer;
+	}
+
 
 }

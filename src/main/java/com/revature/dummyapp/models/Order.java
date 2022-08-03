@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,8 +27,7 @@ public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private long orderId;
+	private long id;
 
 	@Column(name = "order_date")
 	private String orderDate;
@@ -35,13 +35,13 @@ public class Order {
 	@Column(name = "total_price")
 	private Double totalPrice;
 
-	@OneToMany
+	@OneToMany()
 	@JoinColumn(name = "order_id")
 	private List<Product> products;
 
 	public Order() {
 		super();
-		this.orderId = 0;
+		this.id = 0;
 		this.orderDate = "";
 		this.totalPrice = 0.0;
 		this.products = new ArrayList<>();
@@ -49,18 +49,18 @@ public class Order {
 
 	public Order(long orderid, String orderdate, Double totalPrice, List<Product> products) {
 		super();
-		this.orderId = orderid;
+		this.id = orderid;
 		this.orderDate = orderdate;
 		this.totalPrice = totalPrice;
 		this.products = products;
 	}
 
 	public long getOrderId() {
-		return orderId;
+		return id;
 	}
 
 	public void setOrderId(long orderid) {
-		this.orderId = orderid;
+		this.id = orderid;
 	}
 
 	public String getOrderDate() {
@@ -89,7 +89,7 @@ public class Order {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(orderDate, orderId, products, totalPrice);
+		return Objects.hash(orderDate, id, products, totalPrice);
 	}
 
 	@Override
@@ -101,13 +101,13 @@ public class Order {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		return Objects.equals(orderDate, other.orderDate) && orderId == other.orderId
+		return Objects.equals(orderDate, other.orderDate) && id == other.id
 				&& Objects.equals(products, other.products) && Objects.equals(totalPrice, other.totalPrice);
 	}
 
 	@Override
 	public String toString() {
-		return "Order [orderid=" + orderId + ", orderDate=" + orderDate + ", totalPrice=" + totalPrice + ", products="
+		return "Order [orderid=" + id + ", orderDate=" + orderDate + ", totalPrice=" + totalPrice + ", products="
 				+ products + "]";
 	}
 

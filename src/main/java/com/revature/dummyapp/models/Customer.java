@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,6 @@ public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private long id;
 
 	@Column(name = "first_name")
@@ -48,7 +48,7 @@ public class Customer {
 	@JoinColumn(name="role_id")
 	private Role role;
 
-	@OneToMany
+	@OneToMany()
 	@JoinColumn(name = "customer_id")
 	private List<Order> orders;
 

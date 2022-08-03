@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.models.Order;
+import com.revature.dummyapp.services.CustomerService;
 import com.revature.dummyapp.services.OrderService;
 
 /**
@@ -27,9 +29,11 @@ import com.revature.dummyapp.services.OrderService;
 public class OrderController {
 
 	private OrderService orderService;
+	private CustomerService customerService;
 
-	public OrderController(OrderService orderService) {
+	public OrderController(OrderService orderService, CustomerService customerService) {
 		this.orderService = orderService;
+		this.customerService = customerService;
 	}
 
 	@PostMapping()
@@ -77,5 +81,17 @@ public class OrderController {
 		return new ResponseEntity<String>("Order deleted successfully!.", HttpStatus.OK);
 	}
 
+	
+	// POST - PARAM: user id endpoint.com/order/<id>
+	@PostMapping(path = "/{userId}")
+	public ResponseEntity<Customer> saveOrder(@RequestBody Order order, @PathVariable long userId) {
+
+			Customer customer = customerService.getCustomerById(userId);
+			
+			customer = customerService.completeOrder(order, customer);
+			return ResponseEntity.ok(customer);
+
+
+	}
 
 }
