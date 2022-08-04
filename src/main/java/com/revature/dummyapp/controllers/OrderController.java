@@ -80,18 +80,19 @@ public class OrderController {
 
 		return new ResponseEntity<String>("Order deleted successfully!.", HttpStatus.OK);
 	}
-
+	
 	
 	// POST - PARAM: user id endpoint.com/order/<id>
-	@PostMapping(path = "/{userId}")
-	public ResponseEntity<Customer> saveOrder(@RequestBody Order order, @PathVariable long userId) {
+		@PostMapping(path = "/{userId}")
+		public ResponseEntity<Customer> saveOrder(@RequestBody Order order, @PathVariable long userId) {
 
-			Customer customer = customerService.getCustomerById(userId);
-			
-			customer = customerService.completeOrder(order, customer);
-			return ResponseEntity.ok(customer);
+				Customer customer = customerService.getCustomerById(userId);
+				
+				customer = customerService.completeOrder(order, customer);
+				return ResponseEntity.ok(customer);
 
 
-	}
+		}
+
 
 }

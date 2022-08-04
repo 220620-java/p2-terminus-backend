@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.revature.dummyapp.data.CustomerRepository;
 import com.revature.dummyapp.data.OrderRepository;
+import com.revature.dummyapp.data.ProductRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.exceptions.UsernameTakenException;
 import com.revature.dummyapp.models.Customer;
@@ -27,6 +28,9 @@ class CustomerServiceTest {
 	
 	@MockBean
 	private OrderRepository orderRepo;
+	
+	@MockBean
+	private ProductRepository productRepo;
 	
 	@Autowired
 	private CustomerService customerServ;
