@@ -118,35 +118,5 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 	}
 	
-	@Override
-	public Customer completeOrder(Order order, Customer customer) {
-		if (customer == null || order == null) {
-			return null;
-		}
-
-		//get all the users orders
-		List<Order> orders = customer.getOrders();
-		
-		//add current order to the current users orders
-		orders.add(order);
-		customer.setOrders(orders);
-		
-		
-		//List<Product> products = order.getProducts();
-		//products.add(productRepo.findById(order.getOrderId()).orElse(null));
-		
-		List<Product> products = (List<Product>) productRepo.findById(order.getOrderId()).orElse(null);
-		order.setProducts(products);
-		
-		
-		//Save to customer and order to db
-		orderRepo.save(order);
-		customerRepo.save(customer);
-		
-		
-		
-		
-		return customer;
-	}
 	
 }

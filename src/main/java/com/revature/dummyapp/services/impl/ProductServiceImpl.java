@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.revature.dummyapp.data.ProductRepository;
+import com.revature.dummyapp.models.Order;
 import com.revature.dummyapp.models.Product;
 import com.revature.dummyapp.services.ProductService;
 
@@ -51,12 +52,17 @@ public class ProductServiceImpl implements ProductService {
 	
 	
 	@Override
-	public List<Product> getAllProducts(long orderid) {
+	public List<Product> getAllProducts() {
 		// TODO Auto-generated method stub
 		return productRepo.findAll();
 	}
 	
-	
+	@Override
+	public Product saveProduct(Product product, long orderid) {
+		// log.info("Saving new order with id: {}", order.getOrderId());
+		product.setOrderId(orderid);
+		return productRepo.save(product);
+	}
 	
 	
 

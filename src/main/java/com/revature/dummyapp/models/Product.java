@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -30,6 +31,9 @@ public class Product {
 
 	@Column(name = "endpoint")
 	private String endpoint;
+	
+	@Column(name = "order_id")
+	private long orderId;
 
 	/* Constructors */
 
@@ -60,9 +64,17 @@ public class Product {
 		this.endpoint = endpoint;
 	}
 
+	public long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(endpoint, id);
+		return Objects.hash(endpoint, id, orderId);
 	}
 
 	@Override
@@ -74,12 +86,14 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		return Objects.equals(endpoint, other.endpoint) && id == other.id;
+		return Objects.equals(endpoint, other.endpoint) && id == other.id && Objects.equals(orderId, other.orderId);
 	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", endpoint=" + endpoint + "]";
+		return "Product [id=" + id + ", endpoint=" + endpoint + ", orderId=" + orderId + "]";
 	}
+
+	
 
 }

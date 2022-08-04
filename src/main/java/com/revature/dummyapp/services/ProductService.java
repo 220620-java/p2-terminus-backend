@@ -16,5 +16,7 @@ public interface ProductService {
 	 * @param orderid
 	 * @return
 	 */
-	List<Product> getAllProducts(long orderid);
+	List<Product> getAllProducts();
+
+	Product saveProduct(Product product, long orderid);
 }
