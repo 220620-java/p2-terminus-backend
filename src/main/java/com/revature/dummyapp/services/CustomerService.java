@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.revature.dummyapp.exceptions.UsernameTakenException;
 import com.revature.dummyapp.models.Customer;
-
+import com.revature.dummyapp.models.Order;
 
 /**
  * 
@@ -19,38 +19,42 @@ public interface CustomerService {
 	 * @throws UsernameTakenException
 	 */
 	Customer registerCustomer(Customer customer) throws UsernameTakenException;
-	
+
 	/**
 	 * 
 	 * @return
 	 */
 	List<Customer> getAllCustomers();
-	
+
 	/**
 	 * 
 	 * @param customerid
 	 * @return
 	 */
 	Customer getCustomerById(long customerid);
-	
+
 	/**
 	 * 
 	 * @param customer
 	 * @return
 	 */
 	Customer updateCustomer(Customer customer);
-	
+
 	/**
 	 * 
 	 * @param customerid
 	 */
 	void deleteCustomer(long customerid);
-	//Order getOrder(long id);
-/**
- * 
- * @param username
- * @param password
- * @return
- */
+
+	// Order getOrder(long id);
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	Customer logIn(String username, String password);
+
+	Customer completeOrder(Order order, Customer customer);
+
 }
