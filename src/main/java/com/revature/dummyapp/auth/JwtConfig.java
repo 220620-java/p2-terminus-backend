@@ -8,15 +8,15 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.SignatureAlgorithm;
 
 
-@Configuration
+@Component
 public class JwtConfig {
-	@Value("${jwt.secret}")
-	private String salt;
+	
+	private String salt = System.getenv("JWT_SECRET");
 
 	
 	@Value("#{24*60*60*1000}")
