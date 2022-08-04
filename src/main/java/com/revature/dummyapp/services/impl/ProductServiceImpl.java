@@ -58,9 +58,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public Product saveProduct(Product product) {
+	public Product saveProduct(Product product, long id) {
 		// log.info("Saving new order with id: {}", order.getOrderId());
 		//product.setOrderId(orderid);
+		product.setOrderId(id);
 		return productRepo.save(product);
 	}
 	

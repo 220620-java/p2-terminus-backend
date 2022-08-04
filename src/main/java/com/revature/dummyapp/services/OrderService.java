@@ -2,6 +2,7 @@ package com.revature.dummyapp.services;
 
 import java.util.List;
 
+import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.models.Order;
 
 /**
@@ -47,5 +48,9 @@ public interface OrderService {
 	 * @param orderid
 	 */
 	void deleteOrder(long orderid);
+
+	Customer saveOrder2(Order order, Customer customer);
+	
+	
 
 }

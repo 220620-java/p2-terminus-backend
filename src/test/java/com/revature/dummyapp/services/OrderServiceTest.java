@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.revature.dummyapp.data.OrderRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
+import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.models.Order;
 
 @SpringBootTest
@@ -23,6 +24,7 @@ class OrderServiceTest {
 	
 	@Autowired
 	private OrderService orderServ;
+
 
 	@Test
 	void testSaveOrder() {

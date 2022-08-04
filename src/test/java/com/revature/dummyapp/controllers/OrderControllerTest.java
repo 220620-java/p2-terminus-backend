@@ -22,7 +22,9 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.models.Order;
+import com.revature.dummyapp.models.dtos.CustomerDTO;
 import com.revature.dummyapp.models.dtos.OrderDTO;
 import com.revature.dummyapp.services.CustomerService;
 import com.revature.dummyapp.services.OrderService;

@@ -36,6 +36,26 @@ public class OrderController {
 		this.customerService = customerService;
 	}
 
+	/*
+	 * public ResponseEntity<Order> saveOrder(@RequestBody Order order){
+	 * 
+	 * order = orderService.saveOrder(order);
+	 * 
+	 * return ResponseEntity.status(HttpStatus.CREATED).body(order); }
+	 */
+
+	// POST - PARAM: user id endpoint.com/order/<id>
+	@PostMapping(path = "/{userId}")
+	public ResponseEntity<Customer> saveOrder(@RequestBody Order order, @PathVariable long userId) {
+
+		Customer customer = customerService.getCustomerById(userId);
+
+		customer = orderService.saveOrder2(order, customer);
+		return ResponseEntity.ok(customer);
+
+	}
+	
+	// Regular Posting
 	@PostMapping()
 	public ResponseEntity<Order> saveOrder(@RequestBody Order order){
  
@@ -45,19 +65,19 @@ public class OrderController {
 	}
 
 	@GetMapping // change this whatever you want the path to be
-	public List<Order> getAllOrders(){
+	public List<Order> getAllOrders() {
 		return orderService.getAllOrders();
 	}
 
 	// http://localhost:8080/order/1
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<Order> getOrderById(@PathVariable long id){
+	public ResponseEntity<Order> getOrderById(@PathVariable long id) {
 		return new ResponseEntity<Order>(orderService.getOrderById(id), HttpStatus.OK);
 	}
 
 	// http://localhost:8080/order/1
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable long id){
+	public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable long id) {
 
 		if (order.getOrderId() == id) {
 			order = orderService.updateOrder(order);
@@ -73,14 +93,12 @@ public class OrderController {
 
 	// http://localhost:8080/order/1
 	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<String> deleteOrder(@PathVariable long id){
+	public ResponseEntity<String> deleteOrder(@PathVariable long id) {
 
 		// delete user from DB
 		orderService.deleteOrder(id);
 
 		return new ResponseEntity<String>("Order deleted successfully!.", HttpStatus.OK);
 	}
-	
-
 
 }

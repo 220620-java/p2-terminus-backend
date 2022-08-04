@@ -1,8 +1,11 @@
 package com.revature.dummyapp.data;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.revature.dummyapp.models.Order;
 import com.revature.dummyapp.models.Product;
 
 /**
@@ -15,9 +18,5 @@ import com.revature.dummyapp.models.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-	// provides basic CRUD operations for products
 
-//	public Product findById(long productId);
-//	public List<Product> findByCustomer(Customer customer);
-
-}
+	Optional<Order> findByOrderId(long orderId);}

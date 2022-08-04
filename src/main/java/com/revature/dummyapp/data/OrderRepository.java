@@ -1,6 +1,7 @@
 package com.revature.dummyapp.data;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.revature.dummyapp.models.Order;
 
@@ -11,6 +12,7 @@ import com.revature.dummyapp.models.Order;
  * @author Berhanu
  *
  */
+@Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
 }

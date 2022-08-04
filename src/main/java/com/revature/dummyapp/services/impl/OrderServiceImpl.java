@@ -5,9 +5,13 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.revature.dummyapp.data.CustomerRepository;
 import com.revature.dummyapp.data.OrderRepository;
+import com.revature.dummyapp.data.ProductRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
+import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.models.Order;
+import com.revature.dummyapp.models.Product;
 import com.revature.dummyapp.services.OrderService;
 
 /**
@@ -18,16 +22,47 @@ import com.revature.dummyapp.services.OrderService;
  */
 @Service
 public class OrderServiceImpl implements OrderService {
-	private OrderRepository orderRepo;
 	
-	public OrderServiceImpl(OrderRepository orderRepository) {
+	
+	private CustomerRepository customerRepo;
+	private OrderRepository orderRepo;
+	private ProductRepository productRepo;
+
+	public OrderServiceImpl(CustomerRepository customerRepository, OrderRepository orderRepository, ProductRepository productRepository) {
+		this.customerRepo = customerRepository;
 		this.orderRepo = orderRepository;
+		this.productRepo = productRepository;
 	}
 	
+	
+	
 	@Override
-	public Order saveOrder(Order order) {
+	public Customer saveOrder2(Order order, Customer customer) {
 		// log.info("Saving new order with id: {}", order.getOrderId());
-		return orderRepo.save(order);
+		
+		//get all the users orders
+				List<Order> orders = customer.getOrders();
+				
+				//add current order to the current users orders
+				orders.add(order);
+				customer.setOrders(orders);
+				
+			
+				
+				Product product = productRepo.findById(order.getOrderId()).orElse(null);
+				order.setProducts((List<Product>) product);
+				orderRepo.save(order);
+				
+				//List<Product> products = (List<Product>) productRepo.findByOrderId(order.getOrderId()).orElse(null);
+				//order.setProducts(products);
+				
+				//productRepo.saveAll(products);
+				
+				//Save to customer and order to db
+				//orderRepo.save(order);
+				customerRepo.save(customer);
+				
+				return customer;
 	}
 
 	@Override
@@ -68,6 +103,13 @@ public class OrderServiceImpl implements OrderService {
 	public void deleteOrder(long id) {
 		orderRepo.findById(id).orElseThrow(() -> new NotFoundException("Order", "orderid", id));
 		orderRepo.deleteById(id);
+	}
+
+
+
+	@Override
+	public Order saveOrder(Order order) {
+		return orderRepo.save(order);
 	}
 
 }

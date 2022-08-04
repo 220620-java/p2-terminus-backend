@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.dummyapp.models.Order;
 import com.revature.dummyapp.models.Product;
-import com.revature.dummyapp.services.CustomerService;
-import com.revature.dummyapp.services.OrderService;
 import com.revature.dummyapp.services.ProductService;
 
 @RestController
@@ -27,13 +24,15 @@ public class ProductController {
 	}
 	
 	
-	@PostMapping()
-	public ResponseEntity<Product> saveProduct(@RequestBody Product product){
+	@PostMapping(path = "/{id}")
+	public ResponseEntity<Product> saveProduct(@RequestBody Product product, @PathVariable long id){
  
-		product = productService.saveProduct(product);
+		product = productService.saveProduct(product, id);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(product);
 	}
+	
+	
 	
 	@GetMapping // change this whatever you want the path to be
 	public List<Product> getAllProducts(){
