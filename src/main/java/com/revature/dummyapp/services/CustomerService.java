@@ -55,6 +55,11 @@ public interface CustomerService {
 	 */
 	Customer logIn(String username, String password);
 
+	/**
+	 * 
+	 * @param order
+	 * @param customer
+	 * @return
+	 */
 	Customer completeOrder(Order order, Customer customer);
-
 }
