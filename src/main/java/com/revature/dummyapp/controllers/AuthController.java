@@ -23,12 +23,12 @@ import com.revature.dummyapp.services.TokenService;
 @RequestMapping(path="/auth")
 public class AuthController {
 	
-	private CustomerService userServ;
+	private CustomerService customerServ;
 	private TokenService tokenServ;
 
 	
-	public AuthController(CustomerService userServ, TokenService tokenServ) {
-		this.userServ = userServ;
+	public AuthController(CustomerService customerServ, TokenService tokenServ) {
+		this.customerServ = customerServ;
 		this.tokenServ = tokenServ;
 	}
 
@@ -37,9 +37,9 @@ public class AuthController {
 		String username = credentials.get("username");
 		String password = credentials.get("password");
 		
-		Customer customer = userServ.logIn(username, password);
+		Customer customer = customerServ.logIn(username, password);
 		
-		if (customer!=null) {
+		if (customer != null) {
 			CustomerDTO customerDto = new CustomerDTO(customer);
 			String jws = tokenServ.createToken(customer);
 			return ResponseEntity.status(200).header("Auth", jws).body(customerDto);
