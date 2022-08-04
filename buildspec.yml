@@ -9,7 +9,6 @@ phases:
     commands:
       - mv target/*.jar ./dummy-store-app-0.0.1-SNAPSHOT.jar
 
-  artifacts:
+artifacts:
     files:
       - dummy-store-app-0.0.1-SNAPSHOT.jar
-      
