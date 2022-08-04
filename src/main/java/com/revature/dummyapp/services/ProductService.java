@@ -18,5 +18,5 @@ public interface ProductService {
 	 */
 	List<Product> getAllProducts();
 
-	Product saveProduct(Product product, long orderid);
+	Product saveProduct(Product product);
 }

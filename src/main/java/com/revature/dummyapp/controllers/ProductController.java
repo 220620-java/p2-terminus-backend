@@ -20,19 +20,17 @@ import com.revature.dummyapp.services.ProductService;
 @RestController
 @RequestMapping("/product")
 public class ProductController {
-	private OrderService orderService;
 	private ProductService productService;
 
-	public ProductController(OrderService orderService, ProductService productService) {
-		this.orderService = orderService;
+	public ProductController(ProductService productService) {
 		this.productService = productService;
 	}
 	
 	
-	@PostMapping(path = "/{id}")
-	public ResponseEntity<Product> saveProduct(@RequestBody Product product, @PathVariable long id){
+	@PostMapping()
+	public ResponseEntity<Product> saveProduct(@RequestBody Product product){
  
-		product = productService.saveProduct(product, id);
+		product = productService.saveProduct(product);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(product);
 	}
