@@ -6,13 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.revature.dummyapp.data.CustomerRepository;
-import com.revature.dummyapp.data.OrderRepository;
-import com.revature.dummyapp.data.ProductRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.exceptions.UsernameTakenException;
 import com.revature.dummyapp.models.Customer;
-import com.revature.dummyapp.models.Order;
-import com.revature.dummyapp.models.Product;
 import com.revature.dummyapp.services.CustomerService;
 
 /**
@@ -23,13 +19,9 @@ import com.revature.dummyapp.services.CustomerService;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepository customerRepo;
-	private OrderRepository orderRepo;
-	private ProductRepository productRepo;
 
-	public CustomerServiceImpl(CustomerRepository customerRepository, OrderRepository orderRepository, ProductRepository productRepository) {
+	public CustomerServiceImpl(CustomerRepository customerRepository) {
 		this.customerRepo = customerRepository;
-		this.orderRepo = orderRepository;
-		this.productRepo = productRepository;
 	}
 
 	@Override
@@ -117,36 +109,4 @@ public class CustomerServiceImpl implements CustomerService {
 			return null;
 		}
 	}
-	
-	@Override
-	public Customer completeOrder(Order order, Customer customer) {
-		if (customer == null || order == null) {
-			return null;
-		}
-
-		//get all the users orders
-		List<Order> orders = customer.getOrders();
-		
-		//add current order to the current users orders
-		orders.add(order);
-		customer.setOrders(orders);
-		
-		
-		//List<Product> products = order.getProducts();
-		//products.add(productRepo.findById(order.getOrderId()).orElse(null));
-		
-		List<Product> products = (List<Product>) productRepo.findById(order.getOrderId()).orElse(null);
-		order.setProducts(products);
-		
-		
-		//Save to customer and order to db
-		orderRepo.save(order);
-		customerRepo.save(customer);
-		
-		
-		
-		
-		return customer;
-	}
-	
 }
