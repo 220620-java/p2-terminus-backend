@@ -27,14 +27,14 @@ public class TokenServiceImpl implements TokenService {
 private JwtConfig jwtConfig;
 	
 	public TokenServiceImpl(JwtConfig jwtConfig) {
-		this.jwtConfig=jwtConfig;
+		this.jwtConfig = jwtConfig;
 	}
 
 	@Override
 	public String createToken(Customer customer) {
 		String jws = "";
 		
-		if (customer!=null && customer.getUsername()!=null) {
+		if (customer != null && customer.getUsername() != null) {
 			long now = System.currentTimeMillis();
 			
 			jws = Jwts.builder()
@@ -52,7 +52,7 @@ private JwtConfig jwtConfig;
 	}
 
 	@Override
-	public Optional<CustomerDTO> validateToken(String token) throws Exception {
+	public Optional<CustomerDTO> validateToken(String token) throws TokenExpirationException, FailedAuthenticationException {
 		try {
 			Claims jwtClaims = Jwts.parserBuilder()
 				.setSigningKey(jwtConfig.getSigningKey())
@@ -61,13 +61,14 @@ private JwtConfig jwtConfig;
 				.getBody();
 			
 			long now = System.currentTimeMillis();
+			
 			if (jwtClaims.getExpiration().before(new Date(now))) {
 				throw new TokenExpirationException();
 			}
 			
 			CustomerDTO customerDto = parseCustomer(jwtClaims);
-			
 			return Optional.of(customerDto);
+			
 		} catch (JwtException e) {
 			throw new FailedAuthenticationException();
 		}

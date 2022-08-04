@@ -72,10 +72,6 @@ public class CustomerController {
 	 */
 	@PostMapping()
 	public ResponseEntity<Customer> registerCustomer(@RequestBody Customer customer) {
-		// return new ResponseEntity<Customer>(customerService.saveCustomer(customer),
-		// HttpStatus.CREATED);
-		// ERROR: JSON parse error: Cannot deserialize value of type
-		// `com.revature.dummyapp.models.Customer`
 
 		try {
 			customer = customerService.registerCustomer(customer);

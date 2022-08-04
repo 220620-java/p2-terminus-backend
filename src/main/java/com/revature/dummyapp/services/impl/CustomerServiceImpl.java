@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.revature.dummyapp.data.CustomerRepository;
-import com.revature.dummyapp.data.OrderRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.exceptions.UsernameTakenException;
 import com.revature.dummyapp.models.Customer;
@@ -61,25 +60,35 @@ public class CustomerServiceImpl implements CustomerService {
 		// log.info("Updating customer: {}", customer.getFirstname());
 
 		// we need to check whether user with given id is exist in DB or not
-		Customer existingUser = customerRepo.findById(customer.getCustomerId())
-				.orElseThrow(() -> new NotFoundException("Customer", "customerid", customer.getCustomerId()));
+//		Customer existingUser = customerRepo.findById(customer.getCustomerId())
+//				.orElseThrow(() -> new NotFoundException("Customer", "customerid", customer.getCustomerId()));
+//
+//		if (customer.getUsername() != null) {
+//			existingUser.setUsername(customer.getUsername());
+//		}
+//		if (customer.getPassword() != null) {
+//			existingUser.setPassword(customer.getPassword());
+//		}
+//		if (customer.getFirstname() != null) {
+//			existingUser.setFirstname(customer.getFirstname());
+//		}
+//		if (customer.getEmail() != null) {
+//			existingUser.setEmail(customer.getEmail());
+//		}
+//
+//		// save existing user to DB
+//		customerRepo.save(existingUser);
+//		return existingUser;
+		
+		if (customerRepo.findById(customer.getId()).isPresent()) {
+				customerRepo.save(customer);
+			
+			Optional<Customer> customerOpt = customerRepo.findById(customer.getId());
+			if (customerOpt.isPresent())
+				return customerOpt.get();
+		}
+		return null;
 
-		if (customer.getUsername() != null) {
-			existingUser.setUsername(customer.getUsername());
-		}
-		if (customer.getPassword() != null) {
-			existingUser.setPassword(customer.getPassword());
-		}
-		if (customer.getFirstname() != null) {
-			existingUser.setFirstname(customer.getFirstname());
-		}
-		if (customer.getEmail() != null) {
-			existingUser.setEmail(customer.getEmail());
-		}
-
-		// save existing user to DB
-		customerRepo.save(existingUser);
-		return existingUser;
 	}
 
 	@Override
@@ -91,17 +100,6 @@ public class CustomerServiceImpl implements CustomerService {
 		customerRepo.deleteById(id);
 	}
 
-	// @Override
-	// public Order getOrder(long id) {
-	// Optional<Order> orderOpt =
-	// Optional.ofNullable(orderRepo.findByCustomerId(id));
-	//
-	// if (orderOpt.isPresent()) {
-	// return orderOpt.get();
-	// } else return null;
-	//
-	// }
-	
 	@Override
 	public Customer logIn(String username, String password) {
 		Customer customer = customerRepo.findByUsername(username);
@@ -111,7 +109,4 @@ public class CustomerServiceImpl implements CustomerService {
 			return null;
 		}
 	}
-
-	
-
 }
