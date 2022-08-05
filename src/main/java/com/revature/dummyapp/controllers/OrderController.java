@@ -1,6 +1,7 @@
 package com.revature.dummyapp.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +37,12 @@ public class OrderController {
 	
 	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@PostMapping()
-	public ResponseEntity<Order> saveOrder(@RequestBody Order order){
- 
+	public ResponseEntity<Order> saveOrder(@RequestBody Order order, @RequestBody Map<String, String> customerId){
+		
+		String id = customerId.get("customerId");
+		
+		order.setCustomerId(id);
+		
 		order = orderService.saveOrder(order);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(order);
