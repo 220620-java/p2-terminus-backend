@@ -28,7 +28,10 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long orderId;
-
+	
+	@Column(name = "customer_id")
+	private String customerId;
+	
 	@Column(name = "order_date")
 	private String orderDate;
 
@@ -89,7 +92,15 @@ public class Order {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(orderDate, orderId, products, totalPrice);
+		return Objects.hash(customerId, orderDate, orderId, products, totalPrice);
+	}
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 
 	@Override
@@ -101,14 +112,15 @@ public class Order {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		return Objects.equals(orderDate, other.orderDate) && orderId == other.orderId
-				&& Objects.equals(products, other.products) && Objects.equals(totalPrice, other.totalPrice);
+		return Objects.equals(customerId, other.customerId) && Objects.equals(orderDate, other.orderDate)
+				&& orderId == other.orderId && Objects.equals(products, other.products)
+				&& Objects.equals(totalPrice, other.totalPrice);
 	}
 
 	@Override
 	public String toString() {
-		return "Order [orderid=" + orderId + ", orderDate=" + orderDate + ", totalPrice=" + totalPrice + ", products="
-				+ products + "]";
+		return "Order [orderId=" + orderId + ", customerId=" + customerId + ", orderDate=" + orderDate + ", totalPrice="
+				+ totalPrice + ", products=" + products + "]";
 	}
 
 }
