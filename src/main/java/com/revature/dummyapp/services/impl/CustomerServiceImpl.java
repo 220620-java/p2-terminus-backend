@@ -6,11 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.revature.dummyapp.data.CustomerRepository;
-import com.revature.dummyapp.data.RoleRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.exceptions.UsernameTakenException;
 import com.revature.dummyapp.models.Customer;
-import com.revature.dummyapp.models.Role;
 import com.revature.dummyapp.services.CustomerService;
 
 /**
@@ -21,21 +19,15 @@ import com.revature.dummyapp.services.CustomerService;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepository customerRepo;
-	private RoleRepository roleRepo;
 
-	public CustomerServiceImpl(CustomerRepository customerRepository, RoleRepository roleRepository) {
+	public CustomerServiceImpl(CustomerRepository customerRepository) {
 		this.customerRepo = customerRepository;
-		this.roleRepo = roleRepository;
 	}
 
 	@Override
 	public Customer registerCustomer(Customer customer) throws UsernameTakenException {
 		// log.info("Saving new customer: {}", customer.getFirstname());
 		customer.setCustomerId(0);
-		
-		Role role = roleRepo.findById(customer.getRole().getId()).orElse(null);
-		customer.setRole(role);
-		
 		customer = customerRepo.save(customer);
 		
 		if(customer.getCustomerId() == 0) {
