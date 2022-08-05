@@ -27,7 +27,8 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order saveOrder(Order order) {
 		// log.info("Saving new order with id: {}", order.getOrderId());
-		return orderRepo.save(order);
+		order = orderRepo.save(order);
+		return order;
 	}
 
 	@Override

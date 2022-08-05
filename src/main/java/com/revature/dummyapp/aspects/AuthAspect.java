@@ -34,7 +34,6 @@ public class AuthAspect {
 		Auth authAnnotation = ((MethodSignature) joinpoint.getSignature())
 				.getMethod()
 				.getAnnotation(Auth.class);
-		String requiredRole = authAnnotation.requiredRole();
 		
 		String jws = currentReq.getHeader("Auth");
 		Optional<CustomerDTO> customerDtoOpt = Optional.empty();
@@ -49,15 +48,7 @@ public class AuthAspect {
 		if (!customerDtoOpt.isPresent()) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No user info present.");
 		}
-		
-		switch (requiredRole) {
-		case "admin":
-			String roleName = customerDtoOpt.get().getRole().getName();
-			if (!roleName.toLowerCase().equals("admin")) {
-				return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Insufficient privileges.");
-			}
-			break;
-		}
+	
 		
 		return joinpoint.proceed();
 	}

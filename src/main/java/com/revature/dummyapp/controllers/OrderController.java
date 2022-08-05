@@ -36,11 +36,7 @@ public class OrderController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Order> saveOrder(@RequestBody Order order, @RequestBody Map<String, String> customerId){
-		
-		String id = customerId.get("customerId");
-		
-		order.setCustomerId(id);
+	public ResponseEntity<Order> saveOrder(@RequestBody Order order){
 		
 		order = orderService.saveOrder(order);
 
