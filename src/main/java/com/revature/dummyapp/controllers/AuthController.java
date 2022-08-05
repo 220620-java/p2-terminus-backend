@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import com.revature.dummyapp.services.TokenService;
  */
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 @RequestMapping(path="/auth")
 public class AuthController {
 	
@@ -31,7 +33,8 @@ public class AuthController {
 		this.customerServ = customerServ;
 		this.tokenServ = tokenServ;
 	}
-
+	
+	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@PostMapping
 	public ResponseEntity<CustomerDTO> logIn(@RequestBody Map<String, String> credentials) {
 		String username = credentials.get("username");
