@@ -42,7 +42,6 @@ public class CustomerController {
 	 * 
 	 * @return
 	 */
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@GetMapping() // change this whatever you want the path to be
 	public List<Customer> getAllCustomers() {
 		return customerService.getAllCustomers();
@@ -54,7 +53,6 @@ public class CustomerController {
 	 * @param id
 	 * @return
 	 */
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Customer> getCustomerById(@PathVariable long id) {
 		Customer customer = customerService.getCustomerById(id);
@@ -74,7 +72,6 @@ public class CustomerController {
 	 * @param customer
 	 * @return
 	 */
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@PostMapping()
 	public ResponseEntity<Customer> registerCustomer(@RequestBody Customer customer) {
 
@@ -95,7 +92,6 @@ public class CustomerController {
 	 * @param id
 	 * @return
 	 */
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer, @PathVariable long id) {
 		// System.out.println("test");
@@ -121,7 +117,6 @@ public class CustomerController {
 	 * @param id
 	 * @return
 	 */
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<String> deleteCustomer(@PathVariable long id) {
 
