@@ -21,6 +21,7 @@ import com.revature.dummyapp.services.TokenService;
  */
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 @RequestMapping(path="/auth")
 public class AuthController {
 	

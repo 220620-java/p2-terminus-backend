@@ -26,6 +26,7 @@ import com.revature.dummyapp.services.CustomerService;
  *
  */
 @RestController
+@CrossOrigin(maxAge = 3600)
 @RequestMapping(path = "/customer")
 public class CustomerController {
 
