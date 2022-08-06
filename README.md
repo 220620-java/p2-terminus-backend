@@ -1,7 +1,7 @@
 ![alt text](http://terminus-front.s3-website-us-east-1.amazonaws.com/assets/images/logo.png)
 ## Project 2 - Terminus Store Back End
 ## Entity Relationship Diagram
-![alt text](https://github.com/220620-java/p2-terminus-backend/blob/main/ERD.png?raw=true)
+![ERD](https://i.ibb.co/cNPFWBQ/ERD.png)
 
 ## Beanstalk CodePipline
 [Elastic Beanstalk](http://p2terminusoms-env.eba-fcyktpid.us-east-1.elasticbeanstalk.com/)
