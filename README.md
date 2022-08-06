@@ -3,7 +3,7 @@
 ## Entity Relationship Diagram
 ![ERD](https://i.ibb.co/cNPFWBQ/ERD.png)
 ## Flow Chart
-![Flow]([https://files.slack.com/files-pri/T03HZ14U0FN-F03SYJGGF7B/image.png](https://i.ibb.co/GFnq16Q/image-4.png))
+![Flow](https://i.ibb.co/GFnq16Q/image-4.png)
 ## Beanstalk CodePipline
 [Elastic Beanstalk](http://p2terminusoms-env.eba-fcyktpid.us-east-1.elasticbeanstalk.com/)
 
