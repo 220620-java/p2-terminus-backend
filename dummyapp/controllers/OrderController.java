@@ -1,0 +1,93 @@
+package com.revature.dummyapp.controllers;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.revature.dummyapp.models.Order;
+import com.revature.dummyapp.services.OrderService;
+
+/**
+ * 
+ * @author Berhanu
+ * @author Devin
+ *
+ */
+@RestController
+@CrossOrigin(maxAge = 3600)
+@RequestMapping("/order")
+public class OrderController {
+
+	private OrderService orderService;
+
+	public OrderController(OrderService orderService) {
+		this.orderService = orderService;
+	}
+	
+	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
+	@PostMapping()
+	public ResponseEntity<Order> saveOrder(@RequestBody Order order, @RequestBody Map<String, String> customerId){
+		
+		String id = customerId.get("customerId");
+		
+		order.setCustomerId(id);
+		
+		order = orderService.saveOrder(order);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(order);
+	}
+	
+	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
+	@GetMapping // change this whatever you want the path to be
+	public List<Order> getAllOrders(){
+		return orderService.getAllOrders();
+	}
+
+	// http://localhost:8080/order/1
+	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<Order> getOrderById(@PathVariable long id){
+		return new ResponseEntity<Order>(orderService.getOrderById(id), HttpStatus.OK);
+	}
+
+	// http://localhost:8080/order/1
+	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
+	@PutMapping(path = "/{id}")
+	public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable long id){
+
+		if (order.getOrderId() == id) {
+			order = orderService.updateOrder(order);
+			if (order != null) {
+				return ResponseEntity.ok(order);
+			} else {
+				return ResponseEntity.badRequest().build();
+			}
+		} else {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		}
+	}
+
+	// http://localhost:8080/order/1
+	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
+	@DeleteMapping(path = "/{id}")
+	public ResponseEntity<String> deleteOrder(@PathVariable long id){
+
+		// delete user from DB
+		orderService.deleteOrder(id);
+
+		return new ResponseEntity<String>("Order deleted successfully!.", HttpStatus.OK);
+	}
+
+
+}
