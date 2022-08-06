@@ -30,7 +30,7 @@ public class Order {
 	private long orderId;
 	
 	@Column(name = "customer_id")
-	private String customerId;
+	private long customerId;
 	
 	@Column(name = "order_date")
 	private String orderDate;
@@ -95,11 +95,11 @@ public class Order {
 		return Objects.hash(customerId, orderDate, orderId, products, totalPrice);
 	}
 
-	public String getCustomerId() {
+	public long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(String customerId) {
+	public void setCustomerId(long customerId) {
 		this.customerId = customerId;
 	}
 

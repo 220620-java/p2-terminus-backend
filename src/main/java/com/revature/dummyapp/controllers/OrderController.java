@@ -1,7 +1,6 @@
 package com.revature.dummyapp.controllers;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,34 +34,26 @@ public class OrderController {
 		this.orderService = orderService;
 	}
 	
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@PostMapping()
-	public ResponseEntity<Order> saveOrder(@RequestBody Order order, @RequestBody Map<String, String> customerId){
-		
-		String id = customerId.get("customerId");
-		
-		order.setCustomerId(id);
+	public ResponseEntity<Order> saveOrder(@RequestBody Order order){
 		
 		order = orderService.saveOrder(order);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(order);
 	}
 	
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@GetMapping // change this whatever you want the path to be
 	public List<Order> getAllOrders(){
 		return orderService.getAllOrders();
 	}
 
 	// http://localhost:8080/order/1
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Order> getOrderById(@PathVariable long id){
 		return new ResponseEntity<Order>(orderService.getOrderById(id), HttpStatus.OK);
 	}
 
 	// http://localhost:8080/order/1
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable long id){
 
@@ -79,7 +70,6 @@ public class OrderController {
 	}
 
 	// http://localhost:8080/order/1
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<String> deleteOrder(@PathVariable long id){
 

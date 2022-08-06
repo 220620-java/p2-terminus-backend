@@ -8,7 +8,6 @@ import com.revature.dummyapp.auth.JwtConfig;
 import com.revature.dummyapp.exceptions.FailedAuthenticationException;
 import com.revature.dummyapp.exceptions.TokenExpirationException;
 import com.revature.dummyapp.models.Customer;
-import com.revature.dummyapp.models.Role;
 import com.revature.dummyapp.models.dtos.CustomerDTO;
 import com.revature.dummyapp.services.TokenService;
 
@@ -40,7 +39,7 @@ private JwtConfig jwtConfig;
 			jws = Jwts.builder()
 					.setId(String.valueOf(customer.getId()))
 					.setSubject(customer.getUsername())
-					.claim("role", customer.getRole().getName())
+					.claim("role", "user")
 					.setIssuer("terminus")
 					.setIssuedAt(new Date(now))
 					.setExpiration(new Date(now + jwtConfig.getExpiration()))
@@ -83,10 +82,8 @@ private JwtConfig jwtConfig;
 	private CustomerDTO parseCustomer(Claims claims) {
 		int id = Integer.parseInt(claims.getId());
 		String username = claims.getSubject();
-		Role role = new Role();
-		role.setName(claims.get("role").toString());
 		
-		return new CustomerDTO(id, username, role, null);
+		return new CustomerDTO(id, username, null);
 	}
 
 }
