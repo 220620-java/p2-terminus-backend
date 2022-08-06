@@ -12,17 +12,20 @@ import com.revature.dummyapp.models.Order;
  */
 public class OrderDTO {
 	private long orderId;
+	private long customerId;
 	private String orderDate;
 	private double totalPrice;
 	
 	public OrderDTO() {
 		this.orderId = 0;
+		this.customerId = 0;
 		this.orderDate = "";
 		this.totalPrice = 0.0;
 	}
 	
-	public OrderDTO(long orderId, String orderDate, double totalPrice) {
+	public OrderDTO(long orderId, String orderDate, double totalPrice, long customerId) {
 		this.orderId = orderId;
+		this.customerId = customerId;
 		this.orderDate = orderDate;
 		this.totalPrice = totalPrice;
 	}
@@ -57,9 +60,17 @@ public class OrderDTO {
 		this.totalPrice = totalPrice;
 	}
 
+	public long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(long customerId) {
+		this.customerId = customerId;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(orderDate, orderId, totalPrice);
+		return Objects.hash(customerId, orderDate, orderId, totalPrice);
 	}
 
 	@Override
@@ -71,15 +82,14 @@ public class OrderDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		OrderDTO other = (OrderDTO) obj;
-		return Objects.equals(orderDate, other.orderDate) && orderId == other.orderId
+		return customerId == other.customerId && Objects.equals(orderDate, other.orderDate) && orderId == other.orderId
 				&& Double.doubleToLongBits(totalPrice) == Double.doubleToLongBits(other.totalPrice);
 	}
 
 	@Override
 	public String toString() {
-		return "OrderDTO [orderId=" + orderId + ", orderDate=" + orderDate + ", totalPrice=" + totalPrice + "]";
+		return "OrderDTO [orderId=" + orderId + ", customerId=" + customerId + ", orderDate=" + orderDate
+				+ ", totalPrice=" + totalPrice + "]";
 	}
-	
-	
 
 }

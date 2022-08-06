@@ -23,11 +23,12 @@ public class DummyMainApplication {
 		return new WebMvcConfigurer() {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-				        .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
-				        .allowedOrigins("null")
-				        .allowedHeaders("*")
-				        .exposedHeaders("Auth")
-				        .allowCredentials(false);
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
+						.allowedOrigins("*")
+						.allowedHeaders("*")
+						.exposedHeaders("*")
+						.allowCredentials(false)
+						.maxAge(3600);
 			}
 			
 		};

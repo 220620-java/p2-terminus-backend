@@ -17,6 +17,7 @@ import com.revature.dummyapp.models.dtos.CustomerDTO;
 
 	@Around("controllerMethodsReturningUser()")
 	public Object userToUserDTO(ProceedingJoinPoint joinpoint) throws Throwable {
+		@SuppressWarnings("unchecked")
 		ResponseEntity<Customer> resp = (ResponseEntity<Customer>) joinpoint.proceed();
 		
 		Customer customer = resp.getBody();

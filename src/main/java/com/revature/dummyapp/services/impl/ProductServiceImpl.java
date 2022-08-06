@@ -24,32 +24,6 @@ public class ProductServiceImpl implements ProductService {
 			this.productRepo = productRepo;
 	}
 	
-	/* Experimenting with WebClient in order to access Fake Store API */
-
-//	private static final Duration REQUEST_TIMEOUT = Duration.ofSeconds(3);
-//	private final WebClient localApiClient;
-//	
-//	public ProductServiceImpl(WebClient localApiClient) {
-//		this.localApiClient = localApiClient;
-//	}
-//	
-//	public Product getProduct(long id) {
-//		return localApiClient.get()
-//					         .uri("/products/" + id)
-//					         .retrieve()
-//					         .bodyToMono(Product.class)
-//					         .block(REQUEST_TIMEOUT);
-//	}
-//	
-//	public ProductServiceImpl(WebClient.Builder webClientBuilder) {
-//		this.localApiClient = webClientBuilder.baseUrl("https://fakestoreapi.com").build();
-//	}
-//	
-//	public Mono<Product> getProductByName(String name) {
-//		return this.localApiClient.get().uri("/{name}/products", name).retrieve().bodyToMono(Product.class);
-//	}
-	
-	
 	@Override
 	public List<Product> getAllProducts(long orderid) {
 		// TODO Auto-generated method stub
