@@ -9,8 +9,7 @@ Terminus Database deployed on AWS RDS
 ![ERD](https://i.ibb.co/cNPFWBQ/ERD.png)
 
 ## Beanstalk CodePipline
-Project deployed through an AWS CodPipeline, and onto the Amazon Elastic Beanstalk.
-[Elastic Beanstalk](http://p2terminusoms-env.eba-fcyktpid.us-east-1.elasticbeanstalk.com/)
+Project deployed through an AWS CodPipeline, and onto the [Amazon Elastic Beanstalk](http://p2terminusoms-env.eba-fcyktpid.us-east-1.elasticbeanstalk.com/).
 
 # Team Terminus
 * [Devin Abreu](https://github.com/username](https://github.com/devinabreu10)
