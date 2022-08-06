@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,38 +20,41 @@ import javax.persistence.Table;
  * 
  */
 
-@Entity // relates this class to the table in the database
+@Entity
 @Table(name = "products")
 public class Product {
-	/* Fields */
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private long id;
+	@Id   
+	@Column(name = "id")   
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long productId;
 
+	@Column(name = "order_id")
+	private long orderId;
+	
 	@Column(name = "endpoint")
 	private String endpoint;
 
-	/* Constructors */
 
 	public Product() {
-		this.id = 0;
+		this.productId = 0;
+		this.orderId = 0;
 		this.endpoint = "";
 	}
 
-	public Product(long id, String endpoint) {
+	public Product(long id, long orderId, String endpoint) {
 		super();
-		this.id = id;
+		this.productId = id;
+		this.orderId = orderId;
 		this.endpoint = endpoint;
 	}
 
-	public long getId() {
-		return id;
+	public long getProductId() {
+		return productId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setProductId(long id) {
+		this.productId = id;
 	}
 
 	public String getEndpoint() {
@@ -62,7 +67,15 @@ public class Product {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(endpoint, id);
+		return Objects.hash(endpoint, productId, orderId);
+	}
+
+	public long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
 	}
 
 	@Override
@@ -74,12 +87,12 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		return Objects.equals(endpoint, other.endpoint) && id == other.id;
+		return Objects.equals(endpoint, other.endpoint) && productId == other.productId && Objects.equals(orderId, other.orderId);
 	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", endpoint=" + endpoint + "]";
+		return "Product [id=" + productId + ", orderId=" + orderId + ", endpoint=" + endpoint + "]";
 	}
 
 }
