@@ -34,7 +34,6 @@ public class AuthController {
 		this.tokenServ = tokenServ;
 	}
 	
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@PostMapping
 	public ResponseEntity<CustomerDTO> logIn(@RequestBody Map<String, String> credentials) {
 		String username = credentials.get("username");
