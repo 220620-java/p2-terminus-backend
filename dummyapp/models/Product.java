@@ -28,13 +28,8 @@ public class Product {
 	@Column(name = "id")
 	private long id;
 
-	@Column(name = "orderid")
-	private Integer orderid;
-
 	@Column(name = "endpoint")
 	private String endpoint;
-
-    public long getProductById;
 
 	/* Constructors */
 
@@ -64,12 +59,6 @@ public class Product {
 	public void setEndpoint(String endpoint) {
 		this.endpoint = endpoint;
 	}
-	public Integer getOrderId() {
-		return orderid;   
-	}
-	public void setOrderId(Integer orderid) {
-		this.orderid = orderid;
-	}
 
 	@Override
 	public int hashCode() {
@@ -92,12 +81,5 @@ public class Product {
 	public String toString() {
 		return "Product [id=" + id + ", endpoint=" + endpoint + "]";
 	}
-
-    public void setProductId(String id2) {
-    }
-
-    public static Object findById(long id2) {
-        return null;
-    }
 
 }

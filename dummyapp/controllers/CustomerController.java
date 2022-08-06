@@ -42,7 +42,6 @@ public class CustomerController {
 	 * 
 	 * @return
 	 */
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@GetMapping() // change this whatever you want the path to be
 	public List<Customer> getAllCustomers() {
 		return customerService.getAllCustomers();
@@ -54,7 +53,6 @@ public class CustomerController {
 	 * @param id
 	 * @return
 	 */
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Customer> getCustomerById(@PathVariable long id) {
 		Customer customer = customerService.getCustomerById(id);
@@ -74,7 +72,6 @@ public class CustomerController {
 	 * @param customer
 	 * @return
 	 */
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@PostMapping()
 	public ResponseEntity<Customer> registerCustomer(@RequestBody Customer customer) {
 
@@ -87,6 +84,28 @@ public class CustomerController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(customer);
 
 	}
+<<<<<<< HEAD
+	
+	// build get all users REST API
+	@GetMapping
+	public List<Customer> getAllCustomers(){
+		return customerService.getAllCustomers();
+	}
+	
+	// build get user by id REST API
+	// http://localhost:8080/user/1
+	@GetMapping(path = "/getCustomerById{id}")
+	public ResponseEntity<Customer> getCustomerById(@PathVariable("customerid") long customerid){
+		return new ResponseEntity<Customer>(customerService.getCustomerById(customerid), HttpStatus.OK);
+	}
+	
+	// build update user REST API
+	// http://localhost:8080/users/1
+	@PutMapping(path = "/updateCustomer{id}")
+	public ResponseEntity<Customer> updateCustomer(@PathVariable("customerid") long customerid,@RequestBody Customer Customer){
+		System.out.println("test");
+		return new ResponseEntity<Customer>(customerService.updateCustomer(Customer, customerid), HttpStatus.OK);
+=======
 
 	/**
 	 * **REQUIRES AUTH PUT - UPDATE CURRENT CUSTOMER
@@ -95,7 +114,6 @@ public class CustomerController {
 	 * @param id
 	 * @return
 	 */
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer, @PathVariable long id) {
 		// System.out.println("test");
@@ -113,6 +131,7 @@ public class CustomerController {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 
+>>>>>>> main
 	}
 
 	/**
@@ -121,7 +140,6 @@ public class CustomerController {
 	 * @param id
 	 * @return
 	 */
-	@CrossOrigin("http://terminus-front.s3-website-us-east-1.amazonaws.com")
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<String> deleteCustomer(@PathVariable long id) {
 

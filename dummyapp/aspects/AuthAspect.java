@@ -1,18 +1,14 @@
 package com.revature.dummyapp.aspects;
-import java.util.Arrays;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-
 import com.revature.dummyapp.auth.Auth;
 import com.revature.dummyapp.exceptions.FailedAuthenticationException;
 import com.revature.dummyapp.exceptions.TokenExpirationException;
@@ -34,7 +30,6 @@ public class AuthAspect {
 		Auth authAnnotation = ((MethodSignature) joinpoint.getSignature())
 				.getMethod()
 				.getAnnotation(Auth.class);
-		String requiredRole = authAnnotation.requiredRole();
 		
 		String jws = currentReq.getHeader("Auth");
 		Optional<CustomerDTO> customerDtoOpt = Optional.empty();
@@ -49,16 +44,7 @@ public class AuthAspect {
 		if (!customerDtoOpt.isPresent()) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No user info present.");
 		}
-		
-		switch (requiredRole) {
-		case "admin":
-			String roleName = customerDtoOpt.get().getRole().getName();
-			if (!roleName.toLowerCase().equals("admin")) {
-				return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Insufficient privileges.");
-			}
-			break;
-		}
-		
+	
 		return joinpoint.proceed();
 	}
 	
