@@ -12,7 +12,7 @@ Terminus Database deployed on AWS RDS
 Project deployed through an AWS CodPipeline, and onto the [Amazon Elastic Beanstalk](http://p2terminusoms-env.eba-fcyktpid.us-east-1.elasticbeanstalk.com/).
 
 # Team Terminus
-* [Devin Abreu](https://github.com/username](https://github.com/devinabreu10)
+* [Devin Abreu](https://github.com/devinabreu10)
 * [Tony Wiedman](https://github.com/tonywied17)
-* [Berhanu](https://github.com/username](https://github.com/berhanusg)
-* [Noah Cavazos](https://github.com/username](https://github.com/Woodsgump)
+* [Berhanu](https://github.com/berhanusg)
+* [Noah Cavazos](https://github.com/Woodsgump)
