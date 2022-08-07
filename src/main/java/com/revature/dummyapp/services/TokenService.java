@@ -2,6 +2,8 @@ package com.revature.dummyapp.services;
 
 import java.util.Optional;
 
+import com.revature.dummyapp.exceptions.FailedAuthenticationException;
+import com.revature.dummyapp.exceptions.TokenExpirationException;
 import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.models.dtos.CustomerDTO;
 
@@ -24,7 +26,7 @@ public interface TokenService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Optional<CustomerDTO> validateToken(String token) throws Exception;
+	public Optional<CustomerDTO> validateToken(String token) throws FailedAuthenticationException, TokenExpirationException;
 
 	/**
 	 * 

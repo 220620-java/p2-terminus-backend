@@ -24,9 +24,12 @@ public class Product {
 	/* Fields */
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private long id;
+	private long productId;
+	
+	@Column(name = "order_id")
+	private long orderId;
 
 	@Column(name = "endpoint")
 	private String endpoint;
@@ -34,22 +37,32 @@ public class Product {
 	/* Constructors */
 
 	public Product() {
-		this.id = 0;
+		this.productId = 0;
+		this.orderId = 0;
 		this.endpoint = "";
 	}
 
-	public Product(long id, String endpoint) {
+	public Product(long id, long orderId, String endpoint) {
 		super();
-		this.id = id;
+		this.productId = id;
+		this.orderId = orderId;
 		this.endpoint = endpoint;
 	}
 
-	public long getId() {
-		return id;
+	public long getProductId() {
+		return productId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setProductId(long productId) {
+		this.productId = productId;
+	}
+
+	public long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
 	}
 
 	public String getEndpoint() {
@@ -62,7 +75,7 @@ public class Product {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(endpoint, id);
+		return Objects.hash(endpoint, orderId, productId);
 	}
 
 	@Override
@@ -74,12 +87,12 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		return Objects.equals(endpoint, other.endpoint) && id == other.id;
+		return Objects.equals(endpoint, other.endpoint) && orderId == other.orderId && productId == other.productId;
 	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", endpoint=" + endpoint + "]";
+		return "Product [productId=" + productId + ", orderId=" + orderId + ", endpoint=" + endpoint + "]";
 	}
 
 }

@@ -15,9 +15,6 @@ import com.revature.dummyapp.models.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-	// provides basic CRUD operations for products
 
-//	public Product findById(long productId);
-//	public List<Product> findByCustomer(Customer customer);
 
 }
