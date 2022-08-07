@@ -25,7 +25,7 @@ import com.revature.dummyapp.services.OrderService;
  */
 @RestController
 @CrossOrigin(maxAge = 3600)
-@RequestMapping("/order")
+@RequestMapping(path = "/order")
 public class OrderController {
 
 	private OrderService orderService;

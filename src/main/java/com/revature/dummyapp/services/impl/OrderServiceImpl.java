@@ -19,11 +19,11 @@ import com.revature.dummyapp.services.OrderService;
 @Service
 public class OrderServiceImpl implements OrderService {
 	private OrderRepository orderRepo;
-	
+
 	public OrderServiceImpl(OrderRepository orderRepository) {
 		this.orderRepo = orderRepository;
 	}
-	
+
 	@Override
 	public Order saveOrder(Order order) {
 		// log.info("Saving new order with id: {}", order.getOrderId());
@@ -48,21 +48,31 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order updateOrder(Order order) {
-			Order existingOrder = orderRepo.findById(order.getOrderId())
-					.orElseThrow(() -> new NotFoundException("Customer", "customerid", order.getOrderId()));
+//			Order existingOrder = orderRepo.findById(order.getOrderId())
+//					.orElseThrow(() -> new NotFoundException("Customer", "customerid", order.getOrderId()));
+//
+//			if (order.getOrderDate() != null) {
+//				existingOrder.setOrderDate(order.getOrderDate());
+//			}
+//			if (order.getTotalPrice() != null) {
+//				existingOrder.setTotalPrice(order.getTotalPrice());
+//			}
+//			if (order.getProducts() != null) {
+//				existingOrder.setProducts(order.getProducts());
+//			}
+//
+//			orderRepo.save(existingOrder);
+//			return existingOrder;
 
-			if (order.getOrderDate() != null) {
-				existingOrder.setOrderDate(order.getOrderDate());
-			}
-			if (order.getTotalPrice() != null) {
-				existingOrder.setTotalPrice(order.getTotalPrice());
-			}
-			if (order.getProducts() != null) {
-				existingOrder.setProducts(order.getProducts());
-			}
+		if (orderRepo.findById(order.getOrderId()).isPresent()) {
+			orderRepo.save(order);
 
-			orderRepo.save(existingOrder);
-			return existingOrder;
+			Optional<Order> orderOpt = orderRepo.findById(order.getOrderId());
+			if (orderOpt.isPresent())
+				return orderOpt.get();
+
+		}
+		return null;
 	}
 
 	@Override
