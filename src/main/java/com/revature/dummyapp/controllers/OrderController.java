@@ -18,10 +18,10 @@ import com.revature.dummyapp.models.Order;
 import com.revature.dummyapp.services.OrderService;
 
 /**
+ * @author Tony Wiedman
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
  * 
- * @author Berhanu
- * @author Devin
- *
  */
 @RestController
 @CrossOrigin(maxAge = 3600)
@@ -34,6 +34,12 @@ public class OrderController {
 		this.orderService = orderService;
 	}
 	
+	/**
+	 * Performs POST method to save an order in the database
+	 * 
+	 * @param order
+	 * @return
+	 */
 	@PostMapping()
 	public ResponseEntity<Order> saveOrder(@RequestBody Order order){
 		
@@ -42,18 +48,39 @@ public class OrderController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(order);
 	}
 	
-	@GetMapping // change this whatever you want the path to be
+	/**
+	 * Performs GET method to retrieve all orders available
+	 * in the database
+	 * 
+	 * @return
+	 */
+	@GetMapping
 	public List<Order> getAllOrders(){
 		return orderService.getAllOrders();
 	}
-
-	// http://localhost:8080/order/1
+	
+	/**
+	 * Performs GET method to retrieve a specific order
+	 * from the database based on id URI path 
+	 * 
+	 * http://localhost:8080/order/1
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Order> getOrderById(@PathVariable long id){
 		return new ResponseEntity<Order>(orderService.getOrderById(id), HttpStatus.OK);
 	}
 
-	// http://localhost:8080/order/1
+	/**
+	 * Performs PUT method to update a specific order
+	 * in the database based on id URI path
+	 * 
+	 * @param order
+	 * @param id
+	 * @return
+	 */
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable long id){
 
@@ -69,11 +96,15 @@ public class OrderController {
 		}
 	}
 
-	// http://localhost:8080/order/1
+	/**
+	 * Performs DELETE method to remove a specific order
+	 * from the database based on id URI path 
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<String> deleteOrder(@PathVariable long id){
-
-		// delete user from DB
 		orderService.deleteOrder(id);
 
 		return new ResponseEntity<String>("Order deleted successfully!.", HttpStatus.OK);

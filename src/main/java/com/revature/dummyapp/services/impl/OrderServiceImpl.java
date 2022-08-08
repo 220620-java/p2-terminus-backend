@@ -11,10 +11,11 @@ import com.revature.dummyapp.models.Order;
 import com.revature.dummyapp.services.OrderService;
 
 /**
- * 
- * @author Devin
  * @author Tony Wiedman
- *
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
+ * 
  */
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -26,7 +27,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order saveOrder(Order order) {
-		// log.info("Saving new order with id: {}", order.getOrderId());
 		order = orderRepo.save(order);
 		return order;
 	}
@@ -48,22 +48,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order updateOrder(Order order) {
-//			Order existingOrder = orderRepo.findById(order.getOrderId())
-//					.orElseThrow(() -> new NotFoundException("Customer", "customerid", order.getOrderId()));
-//
-//			if (order.getOrderDate() != null) {
-//				existingOrder.setOrderDate(order.getOrderDate());
-//			}
-//			if (order.getTotalPrice() != null) {
-//				existingOrder.setTotalPrice(order.getTotalPrice());
-//			}
-//			if (order.getProducts() != null) {
-//				existingOrder.setProducts(order.getProducts());
-//			}
-//
-//			orderRepo.save(existingOrder);
-//			return existingOrder;
-
 		if (orderRepo.findById(order.getOrderId()).isPresent()) {
 			orderRepo.save(order);
 
@@ -76,9 +60,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void deleteOrder(long id) {
-		orderRepo.findById(id).orElseThrow(() -> new NotFoundException("Order", "orderid", id));
-		orderRepo.deleteById(id);
+	public void deleteOrder(long id) throws NotFoundException {
+		Optional<Order> order = orderRepo.findById(id);
+        if (order.isPresent()) {
+        	orderRepo.deleteById(id);
+        } else {
+            throw new NotFoundException("Order", "Id", id);
+        }
 	}
 
 }

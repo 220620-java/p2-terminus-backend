@@ -14,15 +14,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * 
  * @author Tony Wiedman
- * @auhor Devin
- *
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
+ * 
  */
 @Entity
 @Table(name = "customers")
 public class Customer {
-
+	/* Fields */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -46,6 +47,8 @@ public class Customer {
 	@OneToMany
 	@JoinColumn(name = "customer_id")
 	private List<Order> orders;
+	
+	/* Constructors */
 
 	public Customer() {
 		super();
@@ -59,7 +62,7 @@ public class Customer {
 	}
 
 	/**
-	 * OVERLOADED CONSTRUCTOR FOR CUSTOMER LOGIN
+	 * Overloaded constructor for Customer login
 	 * 
 	 * @param username
 	 * @param password
@@ -71,14 +74,8 @@ public class Customer {
 		this.password = password;
 		this.orders = new ArrayList<>();
 	}
-
-	public long getCustomerId() {
-		return id;
-	}
-
-	public void setCustomerId(long id) {
-		this.id = id;
-	}
+	
+	/* Public Methods (Getters and Setters) */
 
 	public String getFirstname() {
 		return firstname;
@@ -161,7 +158,5 @@ public class Customer {
 		return "Customer [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
 				+ ", username=" + username + ", password=" + password + ", orders=" + orders + "]";
 	}
-
-
 
 }

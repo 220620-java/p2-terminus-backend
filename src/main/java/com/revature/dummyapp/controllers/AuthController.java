@@ -17,9 +17,11 @@ import com.revature.dummyapp.services.TokenService;
 
 /**
  * @author Tony Wiedman
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
  * 
  */
-
 @RestController
 @CrossOrigin(maxAge = 3600)
 @RequestMapping(path="/auth")
@@ -34,6 +36,12 @@ public class AuthController {
 		this.tokenServ = tokenServ;
 	}
 	
+	/**
+	 * validates customer login using JWT
+	 * 
+	 * @param credentials
+	 * @return
+	 */
 	@PostMapping
 	public ResponseEntity<CustomerDTO> logIn(@RequestBody Map<String, String> credentials) {
 		String username = credentials.get("username");
@@ -44,6 +52,7 @@ public class AuthController {
 		if (customer != null) {
 			CustomerDTO customerDto = new CustomerDTO(customer);
 			String jws = tokenServ.createToken(customer);
+			customerDto.setToken(jws);
 			return ResponseEntity.status(200).header("Auth", jws).body(customerDto);
 		}
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

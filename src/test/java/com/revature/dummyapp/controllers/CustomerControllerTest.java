@@ -43,7 +43,7 @@ class CustomerControllerTest {
 	void testRegisterCustomer() throws JsonProcessingException, Exception {
 		Customer mockCustomer = new Customer();
 		Customer mockCustomerWithId = new Customer();
-		mockCustomerWithId.setCustomerId(1);
+		mockCustomerWithId.setId(1);
 		
 		Mockito.when(customerServ.registerCustomer(mockCustomer)).thenReturn(mockCustomerWithId);
 		
@@ -87,11 +87,21 @@ class CustomerControllerTest {
 					.andExpect(content().json(jsonMapper.writeValueAsString(new CustomerDTO(mockCustomer))));
 	
 	}
+	
+	@Test
+	void testGetCustomerByIdNull() throws Exception {
+		
+		Mockito.when(customerServ.getCustomerById(1)).thenReturn(null);
+		
+		mockMvc.perform(get("/customer/1"))
+					.andExpect(status().isNotFound());
+	
+	}
 
 	@Test
 	void testUpdateCustomer() throws JsonProcessingException, Exception {
 		Customer mockCustomer = new Customer();
-		mockCustomer.setCustomerId(1);
+		mockCustomer.setId(1);
 		
 		Mockito.when(customerServ.updateCustomer(mockCustomer)).thenReturn(mockCustomer);
 		
@@ -103,11 +113,27 @@ class CustomerControllerTest {
 	
 	@Test
 	void testUpdateNullCustomer() throws JsonProcessingException, Exception {
+		Customer mockCustomer = new Customer();
+		mockCustomer.setId(1);
+		
+		Mockito.when(customerServ.updateCustomer(mockCustomer)).thenReturn(null);
+		
 		mockMvc.perform(put("/customer/1").contentType(MediaType.APPLICATION_JSON)
-				                        .content(jsonMapper.writeValueAsString(null)))
+				                        .content(jsonMapper.writeValueAsString(mockCustomer)))
 		                                .andExpect(status().isBadRequest());
 	}
-
+	
+	@Test
+    void updateCustomerConflict() throws JsonProcessingException, Exception {
+		Customer mockCustomer = new Customer();
+		mockCustomer.setId(1);
+		
+		mockMvc.perform(put("/customer/2")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonMapper.writeValueAsString(mockCustomer)))
+			.andExpect(status().isConflict());
+	}
+	
 	@Test
 	void testDeleteCustomer() throws Exception {
 

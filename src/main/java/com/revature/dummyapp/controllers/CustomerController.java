@@ -19,11 +19,11 @@ import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.services.CustomerService;
 
 /**
- * 
  * @author Tony Wiedman
- * @author Devin
- * @author Berhanu
- *
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
+ * 
  */
 @RestController
 @CrossOrigin(maxAge = 3600)
@@ -31,16 +31,16 @@ import com.revature.dummyapp.services.CustomerService;
 public class CustomerController {
 
 	private CustomerService customerService;
-	//private CustomerDTO customer = new CustomerDTO();
 
 	public CustomerController(CustomerService customerService) {
 		this.customerService = customerService;
 	}
 
 	/**
-	 * GET - GET ALL CUSTOMERS
+	 * Performs GET method to retrieve all customers available
+	 * in the database  
 	 * 
-	 * @return
+	 * @return a list of customers
 	 */
 	@GetMapping() // change this whatever you want the path to be
 	public List<Customer> getAllCustomers() {
@@ -48,7 +48,8 @@ public class CustomerController {
 	}
 
 	/**
-	 * GET - GET SINGLE CUSTOMER BY ID URI PATH
+	 * Performs GET method to retrieve a specific customer
+	 * in the database based on id URI path 
 	 * 
 	 * @param id
 	 * @return
@@ -63,11 +64,11 @@ public class CustomerController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
-
 	}
 
 	/**
-	 * POST - REGISTER A NEW CUSTOMER
+	 * Performs POST method to register a new customer
+	 * in the database
 	 * 
 	 * @param customer
 	 * @return
@@ -86,7 +87,8 @@ public class CustomerController {
 	}
 
 	/**
-	 * **REQUIRES AUTH PUT - UPDATE CURRENT CUSTOMER
+	 * Performs PUT method to update a specific customer
+	 * in the database based on id URI path (requires Auth PUT)
 	 * 
 	 * @param customer
 	 * @param id
@@ -94,11 +96,7 @@ public class CustomerController {
 	 */
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer, @PathVariable long id) {
-		// System.out.println("test");
-		// return new ResponseEntity<Customer>(customerService.updateCustomer(customer),
-		// HttpStatus.OK);
-
-		if (customer.getCustomerId() == id) {
+		if (customer.getId() == id) {
 			customer = customerService.updateCustomer(customer);
 			if (customer != null) {
 				return ResponseEntity.ok(customer);
@@ -112,7 +110,8 @@ public class CustomerController {
 	}
 
 	/**
-	 * DELETE - DELETES CUSTOMER
+	 * Performs DELETE method to remove a specific customer
+	 * from the database based on id URI path 
 	 * 
 	 * @param id
 	 * @return
@@ -123,7 +122,7 @@ public class CustomerController {
 		// delete user from DB
 		customerService.deleteCustomer(id);
 
-		return new ResponseEntity<String>("Customer deleted successfully!.", HttpStatus.OK);
+		return new ResponseEntity<>("Customer deleted successfully!.", HttpStatus.OK);
 	}
 
 }

@@ -1,27 +1,23 @@
 package com.revature.dummyapp.models.dtos;
 
-import java.util.Objects;
-
 import com.revature.dummyapp.models.Order;
 
 /**
- * Order DTO (Data Transfer Object) to prepare Order object to be sent in HTTP
- * response
+ * @author Tony Wiedman
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
  * 
- * @author Devin
  */
 public class OrderDTO {
+	/* Fields */
+	
 	private long orderId;
 	private long customerId;
 	private String orderDate;
 	private double totalPrice;
 	
-	public OrderDTO() {
-		this.orderId = 0;
-		this.customerId = 0;
-		this.orderDate = "";
-		this.totalPrice = 0.0;
-	}
+	/* Constructors */
 	
 	public OrderDTO(long orderId, String orderDate, double totalPrice, long customerId) {
 		this.orderId = orderId;
@@ -35,6 +31,8 @@ public class OrderDTO {
 		setOrderDate(order.getOrderDate());
 		setTotalPrice(order.getTotalPrice());
 	}
+	
+	/* Public Methods (Getters and Setters) */
 
 	public long getOrderId() {
 		return orderId;
@@ -66,30 +64,6 @@ public class OrderDTO {
 
 	public void setCustomerId(long customerId) {
 		this.customerId = customerId;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(customerId, orderDate, orderId, totalPrice);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OrderDTO other = (OrderDTO) obj;
-		return customerId == other.customerId && Objects.equals(orderDate, other.orderDate) && orderId == other.orderId
-				&& Double.doubleToLongBits(totalPrice) == Double.doubleToLongBits(other.totalPrice);
-	}
-
-	@Override
-	public String toString() {
-		return "OrderDTO [orderId=" + orderId + ", customerId=" + customerId + ", orderDate=" + orderDate
-				+ ", totalPrice=" + totalPrice + "]";
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.revature.dummyapp.services;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,23 +42,39 @@ class TokenServiceTest {
 		Assertions.assertEquals("", tokenServ.createToken(new Customer(null, null)));
 	}
 	
-//	@Test
-//	void testValidateToken() {
-//		String validToken = Jwts.builder().setId("1")
-//										  .setSubject("test")
-//										  .signWith(jwtConfig.getSigningKey())
-//										  .compact();
-//		
-//		Assertions.assertDoesNotThrow(() -> {
-//			tokenServ.validateToken(validToken);
-//		});
-//	}
-	
+	@Test
+	void testValidateToken() {
+		long now = System.currentTimeMillis();
+		Customer mockCustomer = new Customer();
+		
+		mockCustomer.setId(1);
+		mockCustomer.setUsername("test");
+		mockCustomer.setPassword("test_password");
+		mockCustomer.setEmail("test@test.com");
+		
+		String validToken = Jwts.builder().setId(String.valueOf(mockCustomer.getId()))
+										  .setSubject(mockCustomer.getUsername())
+										  .setIssuer("Terminus")
+										  .setIssuedAt(new Date(now))
+										  .setExpiration(new Date(now + jwtConfig.getExpiration()))
+										  .signWith(jwtConfig.getSigningKey())
+										  .compact();
+		
+		Assertions.assertDoesNotThrow(() -> {
+			tokenServ.validateToken(validToken);
+		});
+	}
+	  
 	@Test
 	void testInvalidToken() {
 		Assertions.assertThrows(FailedAuthenticationException.class, () -> {
 			tokenServ.validateToken("invalidToken");
 		});
 	}
+	
+	 @Test
+	    void getDefaultExpiration() {
+	        Assertions.assertEquals(24*60*60*1000,tokenServ.getDefaultExpiration());
+	    }
 
 }

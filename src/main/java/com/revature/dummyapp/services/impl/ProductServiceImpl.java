@@ -10,16 +10,15 @@ import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.models.Product;
 import com.revature.dummyapp.services.ProductService;
 
-
 /**
- * 
- * @author Devin
  * @author Tony Wiedman
- *
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
+ * 
  */
 @Service
 public class ProductServiceImpl implements ProductService {
-	
 	private ProductRepository productRepo;
 	
 	public ProductServiceImpl(ProductRepository productRepo) {
@@ -51,14 +50,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void deleteProduct(long id) {
-
-//		 if (productRepo.findById(id) != null){
-//			productRepo.deleteById(id);
-//		 }
-//		 else throw new NotFoundException("Product", "Id", id);
-		productRepo.findById(id).orElseThrow(() -> new NotFoundException("Product", "productid", id));
-		productRepo.deleteById(id);
+	public void deleteProduct(long id) throws NotFoundException {
+		Optional<Product> product = productRepo.findById(id);
+        if (product.isPresent()) {
+        	productRepo.deleteById(id);
+        } else {
+            throw new NotFoundException("Product", "Id", id);
+        }
 
 	}
 

@@ -16,9 +16,11 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 
 /**
- * 
  * @author Tony Wiedman
- *
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
+ * 
  */
 @Service
 public class TokenServiceImpl implements TokenService {

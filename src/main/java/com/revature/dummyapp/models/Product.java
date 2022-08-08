@@ -13,12 +13,14 @@ import javax.persistence.Table;
  * This class represents the products a Customer will be able to add to a cart
  * and purchase
  * 
- * @author devin
+ * 
  * @author Tony Wiedman
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
  * 
  */
-
-@Entity // relates this class to the table in the database
+@Entity
 @Table(name = "products")
 public class Product {
 	/* Fields */
@@ -48,6 +50,8 @@ public class Product {
 		this.orderId = orderId;
 		this.endpoint = endpoint;
 	}
+	
+	/* Public Methods (Getters and Setters) */
 
 	public long getProductId() {
 		return productId;

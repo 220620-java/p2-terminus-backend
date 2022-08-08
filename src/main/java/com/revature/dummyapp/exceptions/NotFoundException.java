@@ -16,8 +16,8 @@ public class NotFoundException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String reqResource, field;
-	private Object value;
+	private final String reqResource, field;
+	private final Object value;
 	
 	public NotFoundException(String reqResource, String field, Object value) {
 		super(String.format("%s could not be located with %s : '%s'", reqResource, field, value));

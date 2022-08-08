@@ -5,15 +5,16 @@ import java.util.List;
 import com.revature.dummyapp.models.Order;
 
 /**
- * 
- * @author Devin
  * @author Tony Wiedman
- * @author Berhanu
- *
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
+ * 
  */
 public interface OrderService {
 
 	/**
+	 * Saves a new order in the database
 	 * 
 	 * @param order
 	 * @return
@@ -21,6 +22,8 @@ public interface OrderService {
 	Order saveOrder(Order order);
 
 	/**
+	 * Retrieves an order from the database
+	 * based on order id
 	 * 
 	 * @param orderid
 	 * @return
@@ -28,21 +31,22 @@ public interface OrderService {
 	Order getOrderById(long orderid);
 
 	/**
+	 * retrieves a list of all orders in the database
 	 * 
-	 * @param customerid
 	 * @return
 	 */
 	List<Order> getAllOrders();
 
 	/**
 	 * 
+	 * 
 	 * @param order
-	 * @param orderid
 	 * @return
 	 */
 	Order updateOrder(Order order);
 
 	/**
+	 * Removes an order from the database based on id
 	 * 
 	 * @param orderid
 	 */

@@ -88,6 +88,29 @@ public class ProductControllerTest {
 	}
 	
 	@Test
+	void testUpdateNullProduct() throws JsonProcessingException, Exception {
+		Product mockProduct = new Product();
+		mockProduct.setProductId(1);
+		
+		Mockito.when(productServ.updateProduct(mockProduct)).thenReturn(null);
+		
+		mockMvc.perform(put("/product/1").contentType(MediaType.APPLICATION_JSON)
+				                        .content(jsonMapper.writeValueAsString(mockProduct)))
+		                                .andExpect(status().isBadRequest());
+	}
+	
+	@Test
+    void updateProductConflict() throws JsonProcessingException, Exception {
+		Product mockProduct = new Product();
+		mockProduct.setProductId(1);
+		
+		mockMvc.perform(put("/product/2")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonMapper.writeValueAsString(mockProduct)))
+			.andExpect(status().isConflict());
+	}
+	
+	@Test
 	void testDeleteProduct() throws Exception {
 	
 		ResultActions response = mockMvc.perform(delete("/product/1"));
