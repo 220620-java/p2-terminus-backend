@@ -2,10 +2,9 @@ package com.revature.dummyapp.exceptions;
 
 /**
  * 
- * @author Devin
+ * @author Devin Abreu
  *
  */
-//This is a checked exception that should be handled through "try-catch" or "throws"
 public class UsernameTakenException extends Exception {
 
 	/**

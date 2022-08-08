@@ -14,15 +14,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * 
  * @author Tony Wiedman
- * @author Devin
- * @author Berhanu
- *
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
+ * 
  */
 @Entity
 @Table(name = "orders")
 public class Order {
+	/* Fields */
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +42,8 @@ public class Order {
 	@OneToMany
 	@JoinColumn(name = "order_id")
 	private List<Product> products;
+	
+	/* Constructors */
 
 	public Order() {
 		super();
@@ -57,6 +60,8 @@ public class Order {
 		this.totalPrice = totalPrice;
 		this.products = products;
 	}
+	
+	/* Public Methods (Getters and Setters) */
 
 	public long getOrderId() {
 		return orderId;

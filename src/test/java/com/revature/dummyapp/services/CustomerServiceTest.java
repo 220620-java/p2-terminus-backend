@@ -17,7 +17,6 @@ import com.revature.dummyapp.data.OrderRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.exceptions.UsernameTakenException;
 import com.revature.dummyapp.models.Customer;
-import com.revature.dummyapp.models.Order;
 import com.revature.dummyapp.services.impl.CustomerServiceImpl;
 
 @SpringBootTest(classes = CustomerServiceImpl.class)
@@ -35,7 +34,7 @@ class CustomerServiceTest {
 	void registerCustomerSuccessfully() throws UsernameTakenException {
 		Customer mockCustomer = new Customer();
 		Customer mockCustomerWithId = new Customer();
-		mockCustomerWithId.setCustomerId(1);
+		mockCustomerWithId.setId(1);
 		
 		Mockito.when(customerRepo.save(mockCustomer)).thenReturn(mockCustomerWithId);
 		
@@ -85,9 +84,9 @@ class CustomerServiceTest {
 	void loginNullPassword() {
 		String username = "user";
 		String password = null;
-		Customer mockCustomer = new Customer(username, "test");
+		//Customer mockCustomer = new Customer(username, null);
 		
-		Mockito.when(customerRepo.findByUsername(username)).thenReturn(mockCustomer);
+		Mockito.when(customerRepo.findByUsername(username)).thenReturn(null);
 		
 		Customer returnedCustomer = customerServ.logIn(username, password);
 		
@@ -115,6 +114,17 @@ class CustomerServiceTest {
 		
 		Assertions.assertNull(customerServ.updateCustomer(mockCustomer));
 	}
+	
+	@Test
+	void testUpdateCustomerIdNotPresent() {
+		Customer mockCustomer = new Customer();
+		
+		Mockito.when(customerRepo.findById(null))
+							     .thenReturn(Optional.empty());
+		
+		Assertions.assertNull(customerServ.updateCustomer(mockCustomer));
+	}
+	
 	
 	@Test
 	void testGetCustomerById() {
@@ -150,16 +160,23 @@ class CustomerServiceTest {
 	}
 	
 	@Test
-	void testDeleteCustomer() { // this test is not correctly covering the code
-		long id = 1;
-		
-		orderRepo.deleteById(id);
-		
-		Assertions.assertEquals(Optional.empty(), orderRepo.findById(id));
+    void testDeleteCustomer() {
+		Customer mockCustomer = new Customer();
+		mockCustomer.setId(1);
+        Mockito.when(customerRepo.existsById(mockCustomer.getId())).thenReturn(true);
+        Mockito.when(customerRepo.findById(mockCustomer.getId())).thenReturn(Optional.of(mockCustomer));
+        Assertions.assertEquals(Optional.empty(), orderRepo.findById(mockCustomer.getId()));
+    }
+	
+	
+	@Test
+	void testDeleteCustomerNotFound() {
+		Customer mockCustomer = new Customer();
+		mockCustomer.setId(1);
+
+		Assertions.assertThrows(NotFoundException.class, () -> {
+			customerServ.deleteCustomer(mockCustomer.getId());
+		});
 	}
 	
-	
-	
-	
-
 }

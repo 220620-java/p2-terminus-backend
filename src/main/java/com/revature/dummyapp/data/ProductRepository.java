@@ -6,13 +6,12 @@ import org.springframework.stereotype.Repository;
 import com.revature.dummyapp.models.Product;
 
 /**
- * Replaces DAO as the interface that handles objects across the database
- * 
- * @author Devin
  * @author Tony Wiedman
- *
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
+ * 
  */
-
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 

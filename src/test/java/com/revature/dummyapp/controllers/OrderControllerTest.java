@@ -88,6 +88,29 @@ class OrderControllerTest {
 									.andExpect(content().json(jsonMapper.writeValueAsString(new OrderDTO(mockOrder))));
 		
 	}
+	
+	@Test
+	void testUpdateNullOrder() throws JsonProcessingException, Exception {
+		Order mockOrder = new Order();
+		mockOrder.setOrderId(1);
+		
+		Mockito.when(orderServ.updateOrder(mockOrder)).thenReturn(null);
+		
+		mockMvc.perform(put("/order/1").contentType(MediaType.APPLICATION_JSON)
+				                        .content(jsonMapper.writeValueAsString(mockOrder)))
+		                                .andExpect(status().isBadRequest());
+	}
+	
+	@Test
+    void updateOrderConflict() throws JsonProcessingException, Exception {
+		Order mockOrder = new Order();
+		mockOrder.setOrderId(1);
+		
+		mockMvc.perform(put("/order/2")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonMapper.writeValueAsString(mockOrder)))
+			.andExpect(status().isConflict());
+	}
 
 	@Test
 	void testDeleteOrder() throws Exception {

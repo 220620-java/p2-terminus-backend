@@ -11,12 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.revature.dummyapp.data.CustomerRepository;
 import com.revature.dummyapp.data.ProductRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.models.Product;
 
 @SpringBootTest
 public class ProductServiceTest {
+	@MockBean
+	private CustomerRepository customerRepo;
+	
 	@MockBean
 	private ProductRepository productRepo;
 	
@@ -80,15 +84,46 @@ public class ProductServiceTest {
 		Assertions.assertEquals(mockProduct, productServ.updateProduct(mockProduct));
 		
 	}
-
+	
 	@Test
-	void testDeleteProduct() {
+	void testUpdateProductNull() {
+		Product mockProduct = new Product();
+		
+		Mockito.when(productRepo.findById(0L))
+								 .thenReturn(Optional.of(mockProduct))
+							     .thenReturn(Optional.empty());
+		
+		Assertions.assertNull(productServ.updateProduct(mockProduct));
+	}
+	
+	@Test
+	void testUpdateProductIdNotPresent() {
+		Product mockProduct = new Product();
+		
+		Mockito.when(productRepo.findById(null))
+							     .thenReturn(Optional.empty());
+		
+		Assertions.assertNull(productServ.updateProduct(mockProduct));
+	}
+	
+	@Test
+    void testDeleteProduct() {
+		Product mockProduct = new Product();
+		mockProduct.setProductId(1);
+        Mockito.when(productRepo.existsById(mockProduct.getProductId())).thenReturn(true);
+        Mockito.when(productRepo.findById(mockProduct.getProductId())).thenReturn(Optional.of(mockProduct));
+        Assertions.assertEquals(Optional.empty(), customerRepo.findById(mockProduct.getProductId()));
+    }
+	
+	
+	@Test
+	void testDeleteProductNotFound() {
 		Product mockProduct = new Product();
 		mockProduct.setProductId(1);
 		
-		productRepo.deleteById(mockProduct.getProductId());
-		
-		Assertions.assertEquals(Optional.empty(), productRepo.findById(mockProduct.getProductId()));
+		Assertions.assertThrows(NotFoundException.class, () -> {
+			productServ.deleteProduct(mockProduct.getProductId());
+		});
 	}
 	
 }

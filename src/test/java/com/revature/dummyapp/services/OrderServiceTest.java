@@ -12,12 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.revature.dummyapp.data.CustomerRepository;
 import com.revature.dummyapp.data.OrderRepository;
 import com.revature.dummyapp.exceptions.NotFoundException;
 import com.revature.dummyapp.models.Order;
 
 @SpringBootTest
 class OrderServiceTest {
+	@MockBean
+	private CustomerRepository customerRepo;
+	
 	@MockBean
 	private OrderRepository orderRepo;
 	
@@ -82,15 +86,48 @@ class OrderServiceTest {
 		Assertions.assertEquals(mockOrder, orderServ.updateOrder(mockOrder));
 		
 	}
-
+	
 	@Test
-	void testDeleteOrder() {
+	void testUpdateOrderNull() {
+		Order mockOrder = new Order();
+		
+		Mockito.when(orderRepo.findById(0L))
+								 .thenReturn(Optional.of(mockOrder))
+							     .thenReturn(Optional.empty());
+		
+		Assertions.assertNull(orderServ.updateOrder(mockOrder));
+	}
+	
+	@Test
+	void testUpdateOrderIdNotPresent() {
+		Order mockOrder = new Order();
+		
+		Mockito.when(orderRepo.findById(null))
+							     .thenReturn(Optional.empty());
+		
+		Assertions.assertNull(orderServ.updateOrder(mockOrder));
+	}
+
+	
+	@Test
+    void testDeleteOrder() {
+		Order mockOrder = new Order();
+		mockOrder.setOrderId(1);
+        Mockito.when(orderRepo.existsById(mockOrder.getOrderId())).thenReturn(true);
+        Mockito.when(orderRepo.findById(mockOrder.getOrderId())).thenReturn(Optional.of(mockOrder));
+        Assertions.assertEquals(Optional.empty(), customerRepo.findById(mockOrder.getOrderId()));
+        
+    }
+	
+	
+	@Test
+	void testDeleteOrderNotFound() {
 		Order mockOrder = new Order();
 		mockOrder.setOrderId(1);
 		
-		orderRepo.deleteById(mockOrder.getOrderId());
-		
-		Assertions.assertEquals(Optional.empty(), orderRepo.findById(mockOrder.getOrderId()));
+		Assertions.assertThrows(NotFoundException.class, () -> {
+			orderServ.deleteOrder(mockOrder.getOrderId());
+		});
 	}
 	
 }

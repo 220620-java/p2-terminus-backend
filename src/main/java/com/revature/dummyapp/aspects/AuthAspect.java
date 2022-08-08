@@ -27,6 +27,7 @@ public class AuthAspect {
 
 	@Around("methodsWithAuthAnnotation()")
 	public Object authenticate(ProceedingJoinPoint joinpoint) throws Throwable {
+		@SuppressWarnings("unused")
 		Auth authAnnotation = ((MethodSignature) joinpoint.getSignature())
 				.getMethod()
 				.getAnnotation(Auth.class);

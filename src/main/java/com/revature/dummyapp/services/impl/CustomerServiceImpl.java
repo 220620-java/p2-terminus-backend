@@ -12,9 +12,11 @@ import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.services.CustomerService;
 
 /**
- * 
  * @author Tony Wiedman
- *
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
+ * 
  */
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -26,11 +28,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer registerCustomer(Customer customer) throws UsernameTakenException {
-		// log.info("Saving new customer: {}", customer.getFirstname());
-		customer.setCustomerId(0);
+		customer.setId(0);
 		customer = customerRepo.save(customer);
 		
-		if(customer.getCustomerId() == 0) {
+		if(customer.getId() == 0) {
 			throw new UsernameTakenException();
 		}
 		
@@ -50,8 +51,6 @@ public class CustomerServiceImpl implements CustomerService {
 		} else {
 			throw new NotFoundException("Customer", "Id", id);
 		}
-		// return customerRepo.findById(id).orElseThrow(() ->
-		// new NotFoundException("Customer", "customerid", id));
 
 	}
 
@@ -70,12 +69,14 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void deleteCustomer(long id) {
-		// log.info("Deleted customer...")
-
-		// check whether a user exist in a DB or not
-		customerRepo.findById(id).orElseThrow(() -> new NotFoundException("Customer", "customerid", id));
-		customerRepo.deleteById(id);
+	public void deleteCustomer(long id) throws NotFoundException {
+		Optional<Customer> customer = customerRepo.findById(id);
+        if (customer.isPresent()) {
+        	customerRepo.deleteById(id);
+        } else {
+            throw new NotFoundException("Customer", "Id", id);
+        }
+		
 	}
 
 	@Override

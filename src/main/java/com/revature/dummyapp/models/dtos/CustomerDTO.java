@@ -1,8 +1,6 @@
 package com.revature.dummyapp.models.dtos;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import com.revature.dummyapp.models.Customer;
 import com.revature.dummyapp.models.Order;
@@ -11,9 +9,8 @@ import com.revature.dummyapp.models.Order;
  * Customer DTO (Data Transfer Object) to prepare Customer object to be sent in HTTP
  * response
  * 
- * @author Devin
+ * @author Devin Abreu
  */
-
 public class CustomerDTO {
 	/* Fields */
 	private long id;
@@ -24,27 +21,6 @@ public class CustomerDTO {
 	private List<Order> orders;
 	
 	/* Constructors */
-	public CustomerDTO() {
-		super();
-		this.id = 0;
-		this.firstname = "";
-		this.lastname = "";
-		this.username = "";
-		this.email = "";
-		this.orders = new ArrayList<>();
-
-	}
-
-	public CustomerDTO(long id, String firstname, String lastname, String username, String email, List<Order> orders) {
-		super();
-		setId(id);
-		setFirstname(firstname);
-		setLastname(lastname);
-		setUsername(username);
-		setEmail(email);
-		setOrders(orders);
-
-	}
 
 	public CustomerDTO(Customer customer) {
 		super();
@@ -63,6 +39,8 @@ public class CustomerDTO {
 		setOrders(orders);
 
 	}
+	
+	/* Public Methods (Getters and Setters) */
 
 	public long getId() {
 		return id;
@@ -111,31 +89,9 @@ public class CustomerDTO {
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(email, firstname, id, lastname, orders, username);
+	
+	public void setToken(String jws) {
+		
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CustomerDTO other = (CustomerDTO) obj;
-		return Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname) && id == other.id
-				&& Objects.equals(lastname, other.lastname) && Objects.equals(orders, other.orders)
-				&& Objects.equals(username, other.username);
-	}
-
-	@Override
-	public String toString() {
-		return "CustomerDTO [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", username="
-				+ username + ", email=" + email + ", orders=" + orders + "]";
-	}
-
 	
 }

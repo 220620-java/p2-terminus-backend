@@ -18,10 +18,11 @@ import com.revature.dummyapp.models.Product;
 import com.revature.dummyapp.services.ProductService;
 
 /**
+ * @author Tony Wiedman
+ * @author Devin Abreu
+ * @author Berhanu Seyoum
+ * @author Noah Cavazos
  * 
- * @author Berhanu
- * @author Devin
- *
  */
 @RestController
 @CrossOrigin(maxAge = 3600)
@@ -33,7 +34,12 @@ public class ProductController {
 	public ProductController(ProductService productService) {
 		this.productService = productService;
 	}
-
+	/**
+	 * Performs POST method to save a product in the database
+	 * 
+	 * @param product
+	 * @return
+	 */
 	@PostMapping()
 	public ResponseEntity<Product> saveProduct(@RequestBody Product product){
 
@@ -41,17 +47,38 @@ public class ProductController {
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(product);
 	}
-
+	
+	/**
+	 * Performs GET method to retrieve all products available
+	 * in the database
+	 * 
+	 * @return
+	 */
 	@GetMapping
 	public List<Product> getAllProducts(){
 		return productService.getAllProducts();
 	}
-
+	
+	/**
+	 * Performs GET method to retrieve a specific product
+	 * from the database based on id URI path 
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Product> getProductById(@PathVariable long id){
 		return new ResponseEntity<Product>(productService.getProductById(id), HttpStatus.OK);
 	}
-
+	
+	/**
+	 * Performs PUT method to update a specific product
+	 * in the database based on id URI path
+	 * 
+	 * @param product
+	 * @param id
+	 * @return
+	 */
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable long id){
 
@@ -66,16 +93,19 @@ public class ProductController {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
-
+	/**
+	 * Performs DELETE method to remove a specific product
+	 * from the database based on id URI path 
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<String> deleteProduct(@PathVariable long id){
-
-		// delete product from DB
 		productService.deleteProduct(id);
 
 		return new ResponseEntity<String>("Product deleted successfully!.", HttpStatus.OK);
 	}
-
 
 }
 
